@@ -1,0 +1,140 @@
+{
+  "AnnualInformationStatement": {
+    "createdDate": "2024-12-15",
+    "taxpayerInfo": {
+      "name": "RAMESH KUMAR SHARMA",
+      "pan": "ABCPS1234D",
+      "assessmentYear": "2024-25",
+      "financialYear": "2023-24"
+    },
+    "tdsTcsInformation": [
+      {
+        "deductorName": "ABC TECHNOLOGIES PVT LTD",
+        "deductorTAN": "MUMR12345A",
+        "sectionCode": "192",
+        "sectionDescription": "Salary",
+        "amountPaid": 1800000,
+        "taxDeducted": 320000,
+        "filingType": "Regular",
+        "transactionDate": "2023-12-31",
+        "remarks": ""
+      },
+      {
+        "deductorName": "HDFC BANK LIMITED",
+        "deductorTAN": "MUMH98765B",
+        "sectionCode": "194A",
+        "sectionDescription": "Interest other than interest on securities",
+        "amountPaid": 45000,
+        "taxDeducted": 4500,
+        "filingType": "Regular",
+        "transactionDate": "2024-03-15",
+        "remarks": ""
+      },
+      {
+        "deductorName": "NATIONAL SECURITIES DEPOSITORY LTD",
+        "deductorTAN": "MUMND1234C",
+        "sectionCode": "194",
+        "sectionDescription": "Dividend",
+        "amountPaid": 28000,
+        "taxDeducted": 2800,
+        "filingType": "Regular",
+        "transactionDate": "2023-09-20",
+        "remarks": ""
+      }
+    ],
+    "salaryInformation": [
+      {
+        "employerName": "ABC TECHNOLOGIES PVT LTD",
+        "employerTAN": "MUMR12345A",
+        "grossSalary": 2200000,
+        "exemptAllowances": 400000,
+        "netSalary": 1800000,
+        "professionalTax": 2400,
+        "standardDeduction": 50000,
+        "netTaxableSalary": 1747600,
+        "taxDeducted": 320000,
+        "period": "Apr 2023 – Mar 2024"
+      }
+    ],
+    "dividendInformation": [
+      {
+        "companyName": "INFOSYS LIMITED",
+        "isin": "INE009A01021",
+        "dividendType": "Final",
+        "dividendAmount": 15000,
+        "taxDeducted": 1500,
+        "paymentDate": "2023-10-30"
+      },
+      {
+        "companyName": "TATA CONSULTANCY SERVICES LTD",
+        "isin": "INE467B01029",
+        "dividendType": "Interim",
+        "dividendAmount": 13000,
+        "taxDeducted": 1300,
+        "paymentDate": "2024-01-15"
+      }
+    ],
+    "interestInformation": [
+      {
+        "payerName": "HDFC BANK LIMITED",
+        "accountType": "Savings Account",
+        "interestAmount": 12000,
+        "taxDeducted": 0,
+        "period": "FY 2023-24"
+      },
+      {
+        "payerName": "STATE BANK OF INDIA",
+        "accountType": "Fixed Deposit",
+        "interestAmount": 33000,
+        "taxDeducted": 3300,
+        "period": "FY 2023-24"
+      }
+    ],
+    "capitalGains": [
+      {
+        "assetType": "Listed Equity Shares",
+        "saleDate": "2023-11-20",
+        "saleAmount": 250000,
+        "costOfAcquisition": 180000,
+        "capitalGain": 70000,
+        "gainType": "Short Term",
+        "brokerName": "ZERODHA BROKING LTD"
+      },
+      {
+        "assetType": "Equity Mutual Fund Units",
+        "saleDate": "2024-02-10",
+        "saleAmount": 450000,
+        "costOfAcquisition": 300000,
+        "capitalGain": 150000,
+        "gainType": "Long Term",
+        "brokerName": "HDFC SECURITIES LIMITED"
+      }
+    ],
+    "taxPaymentInformation": [
+      {
+        "paymentType": "Advance Tax",
+        "bsrCode": "0240229",
+        "serialNumber": "00123",
+        "challanDate": "2023-09-15",
+        "amount": 80000,
+        "assessmentYear": "2024-25"
+      },
+      {
+        "paymentType": "Advance Tax",
+        "bsrCode": "0240229",
+        "serialNumber": "00456",
+        "challanDate": "2023-12-15",
+        "amount": 80000,
+        "assessmentYear": "2024-25"
+      },
+      {
+        "paymentType": "Advance Tax",
+        "bsrCode": "0240229",
+        "serialNumber": "00789",
+        "challanDate": "2024-03-15",
+        "amount": 80000,
+        "assessmentYear": "2024-25"
+      }
+    ]
+  }
+}

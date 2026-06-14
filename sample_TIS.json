@@ -1,0 +1,93 @@
+{
+  "TaxInformationSummary": {
+    "pan": "ABCPS1234D",
+    "taxpayerName": "RAMESH KUMAR SHARMA",
+    "assessmentYear": "2024-25",
+    "statementDate": "2024-12-15",
+    "salary": [
+      {
+        "category": "Gross Salary",
+        "valueReportedInAIS": 2200000,
+        "valueAfterDeduction": 2200000,
+        "derivedValue": 2200000,
+        "source": "Employer Reporting"
+      },
+      {
+        "category": "Standard Deduction u/s 16(ia)",
+        "valueReportedInAIS": 50000,
+        "valueAfterDeduction": 50000,
+        "derivedValue": 50000,
+        "source": "As per rule"
+      }
+    ],
+    "capitalGains": [
+      {
+        "assetClass": "Equity Shares (Listed)",
+        "gainType": "Short Term Capital Gain (STCG)",
+        "saleProceeds": 250000,
+        "costOfAcquisition": 180000,
+        "netGain": 70000,
+        "applicableSection": "111A",
+        "taxRate": "15%"
+      },
+      {
+        "assetClass": "Equity Mutual Funds",
+        "gainType": "Long Term Capital Gain (LTCG)",
+        "saleProceeds": 450000,
+        "costOfAcquisition": 300000,
+        "netGain": 150000,
+        "applicableSection": "112A",
+        "taxRate": "10% above ₹1L"
+      }
+    ],
+    "otherSources": [
+      {
+        "category": "Dividend Income",
+        "grossAmount": 28000,
+        "taxDeducted": 2800,
+        "netAmount": 25200
+      },
+      {
+        "category": "Interest on Savings Account",
+        "grossAmount": 12000,
+        "taxDeducted": 0,
+        "netAmount": 12000
+      },
+      {
+        "category": "Interest on Fixed Deposit",
+        "grossAmount": 33000,
+        "taxDeducted": 3300,
+        "netAmount": 29700
+      }
+    ],
+    "taxLiability": [
+      {
+        "headOfIncome": "Salaries",
+        "grossIncome": 2200000,
+        "deductions": 450000,
+        "taxableIncome": 1750000,
+        "taxComputed": 360000,
+        "surcharge": 0,
+        "healthAndEducationCess": 14400,
+        "totalTaxLiability": 374400
+      }
+    ],
+    "taxPaid": [
+      {
+        "paymentType": "TDS by Employer (192)",
+        "amount": 320000,
+        "quarter": "Q1 to Q4 FY2023-24"
+      },
+      {
+        "paymentType": "TDS by Bank (194A)",
+        "amount": 7800,
+        "quarter": "Multiple quarters"
+      },
+      {
+        "paymentType": "Advance Tax",
+        "amount": 240000,
+        "quarter": "Q1, Q2, Q3 FY2023-24"
+      }
+    ]
+  }
+}

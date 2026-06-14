@@ -1,0 +1,94 @@
+{
+  "Form26AS": {
+    "pan": "ABCPS1234D",
+    "taxpayerName": "RAMESH KUMAR SHARMA",
+    "assessmentYear": "2024-25",
+    "generatedOn": "2024-12-15",
+    "partA": [
+      {
+        "slNo": 1,
+        "deductorName": "ABC TECHNOLOGIES PVT LTD",
+        "deductorTAN": "MUMR12345A",
+        "totalAmountPaid": 1800000,
+        "totalTaxDeducted": 320000,
+        "totalTaxDeposited": 320000,
+        "section": "192A",
+        "category": "Salary"
+      }
+    ],
+    "partA1": [
+      {
+        "slNo": 1,
+        "deductorName": "HDFC BANK LIMITED",
+        "deductorTAN": "MUMH98765B",
+        "totalAmountPaid": 45000,
+        "totalTaxDeducted": 4500,
+        "totalTaxDeposited": 4500,
+        "section": "194A",
+        "category": "Interest other than securities"
+      },
+      {
+        "slNo": 2,
+        "deductorName": "NATIONAL SECURITIES DEPOSITORY LTD",
+        "deductorTAN": "MUMND1234C",
+        "totalAmountPaid": 28000,
+        "totalTaxDeducted": 2800,
+        "totalTaxDeposited": 2800,
+        "section": "194",
+        "category": "Dividend"
+      }
+    ],
+    "partC": [
+      {
+        "slNo": 1,
+        "bsrCodeOfBranch": "0240229",
+        "dateOfDeposit": "2023-09-15",
+        "challanSerialNumber": "00123",
+        "taxAmount": 80000,
+        "surchargePaid": 0,
+        "educationCessPaid": 0,
+        "interestPaid": 0,
+        "totalAmountDeposited": 80000,
+        "minorHeadDescription": "Advance Tax",
+        "majorHeadDescription": "Income Tax on Companies (Corporation Tax)"
+      },
+      {
+        "slNo": 2,
+        "bsrCodeOfBranch": "0240229",
+        "dateOfDeposit": "2023-12-15",
+        "challanSerialNumber": "00456",
+        "taxAmount": 80000,
+        "surchargePaid": 0,
+        "educationCessPaid": 0,
+        "interestPaid": 0,
+        "totalAmountDeposited": 80000,
+        "minorHeadDescription": "Advance Tax",
+        "majorHeadDescription": "Income Tax on Companies (Corporation Tax)"
+      },
+      {
+        "slNo": 3,
+        "bsrCodeOfBranch": "0240229",
+        "dateOfDeposit": "2024-03-15",
+        "challanSerialNumber": "00789",
+        "taxAmount": 80000,
+        "surchargePaid": 0,
+        "educationCessPaid": 0,
+        "interestPaid": 0,
+        "totalAmountDeposited": 80000,
+        "minorHeadDescription": "Advance Tax",
+        "majorHeadDescription": "Income Tax on Companies (Corporation Tax)"
+      }
+    ],
+    "partD": [
+      {
+        "slNo": 1,
+        "assessmentYear": "2022-23",
+        "refundIssued": 15000,
+        "dateOfPayment": "2023-04-20",
+        "mode": "Direct Credit",
+        "natureOfRefund": "Income Tax Refund",
+        "interestOnRefund": 450
+      }
+    ]
+  }
+}

@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AIS / TIS / Form 26AS Viewer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #0f1923;
+    --ink-muted: #4a5568;
+    --ink-faint: #8a97a8;
+    --rule: #dde3ea;
+    --surface: #f7f9fc;
+    --surface-alt: #eef2f7;
+    --white: #ffffff;
+    --accent: #1a56db;
+    --accent-light: #e8effd;
+    --accent-dark: #1140a8;
+    --safe: #0d7a55;
+    --safe-light: #e0f5ef;
+    --warn: #b45309;
+    --warn-light: #fef3e2;
+    --danger: #c0392b;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+    --radius: 8px;
+    --radius-sm: 5px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--white);
+    border-bottom: 1.5px solid var(--rule);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .header-emblem {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .header-emblem svg { color: white; }
+  .header-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .header-subtitle {
+    font-size: 11px;
+    color: var(--ink-faint);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+  .privacy-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--safe-light);
+    color: var(--safe);
+    border: 1px solid #b7e3d4;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .privacy-badge svg { flex-shrink: 0; }
+
+  /* ── Main layout ── */
+  .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ── Upload zone ── */
+  .upload-section { margin-bottom: 32px; }
+
+  .upload-zone {
+    border: 2px dashed #c5cfd9;
+    border-radius: var(--radius);
+    background: var(--white);
+    padding: 52px 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+    position: relative;
+  }
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--accent);
+    background: var(--accent-light);
+    box-shadow: 0 0 0 4px rgba(26,86,219,0.07);
+  }
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .upload-icon {
+    width: 52px; height: 52px;
+    background: var(--surface);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    border: 1.5px solid var(--rule);
+  }
+  .upload-heading { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .upload-sub { font-size: 13px; color: var(--ink-muted); }
+  .upload-sub strong { color: var(--accent); font-weight: 500; }
+  .upload-formats {
+    display: flex; gap: 8px; justify-content: center; margin-top: 20px; flex-wrap: wrap;
+  }
+  .format-chip {
+    background: var(--surface-alt);
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Privacy notice ── */
+  .privacy-notice {
+    margin-top: 16px;
+    background: var(--safe-light);
+    border: 1px solid #b7e3d4;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12.5px;
+    color: var(--safe);
+  }
+  .privacy-notice svg { flex-shrink: 0; margin-top: 1px; }
+
+  /* ── Error box ── */
+  .error-box {
+    background: #fef2f2; border: 1px solid #fecaca;
+    border-radius: var(--radius-sm); padding: 12px 16px;
+    display: flex; gap: 10px; align-items: flex-start;
+    color: var(--danger); font-size: 13px; margin-bottom: 20px;
+  }
+  .error-box svg { flex-shrink: 0; margin-top: 1px; }
+
+  /* ── Document meta ── */
+  .doc-meta {
+    display: none;
+    background: var(--white);
+    border: 1.5px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .doc-meta.visible { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .doc-meta-left { display: flex; align-items: center; gap: 14px; }
+  .doc-type-badge {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 4px 10px;
+    border-radius: 4px; font-family: 'IBM Plex Mono', monospace;
+  }
+  .badge-ais { background: #e0ebff; color: #1140a8; border: 1px solid #b8d0f7; }
+  .badge-tis { background: #fef3e2; color: #b45309; border: 1px solid #fad7a0; }
+  .badge-26as { background: #e8faf2; color: #0d7a55; border: 1px solid #a7dfca; }
+  .badge-unknown { background: var(--surface-alt); color: var(--ink-muted); border: 1px solid var(--rule); }
+  .doc-meta-info { font-size: 13px; }
+  .doc-meta-info .label { color: var(--ink-faint); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .doc-meta-info .value { font-weight: 500; font-size: 14px; }
+  .doc-meta-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 16px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 500; cursor: pointer;
+    border: 1.5px solid transparent; transition: all 0.14s;
+    font-family: inherit; white-space: nowrap;
+    text-decoration: none;
+  }
+  .btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
+  .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+  .btn-secondary { background: var(--white); color: var(--ink); border-color: var(--rule); }
+  .btn-secondary:hover { background: var(--surface-alt); }
+  .btn-ghost { background: transparent; color: var(--accent); border-color: transparent; padding: 8px 10px; }
+  .btn-ghost:hover { background: var(--accent-light); }
+  .btn-sm { padding: 5px 11px; font-size: 12px; }
+  .btn svg { flex-shrink: 0; }
+
+  /* ── Section nav ── */
+  .section-nav {
+    display: none;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    background: var(--white);
+    border: 1.5px solid var(--rule);
+    border-radius: var(--radius);
+    padding: 8px;
+  }
+  .section-nav.visible { display: flex; }
+  .section-nav-btn {
+    padding: 6px 14px; border-radius: 5px; font-size: 12.5px; font-weight: 500;
+    cursor: pointer; border: none; background: transparent; color: var(--ink-muted);
+    transition: all 0.14s; font-family: inherit;
+  }
+  .section-nav-btn:hover { background: var(--surface-alt); color: var(--ink); }
+  .section-nav-btn.active { background: var(--accent); color: white; }
+
+  /* ── Tables ── */
+  .tables-container { display: flex; flex-direction: column; gap: 28px; }
+  .table-block { display: none; }
+  .table-block.active { display: block; }
+
+  .table-card {
+    background: var(--white);
+    border: 1.5px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  .table-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    border-bottom: 1.5px solid var(--rule);
+    background: var(--surface);
+    gap: 12px; flex-wrap: wrap;
+  }
+  .table-card-title {
+    font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;
+  }
+  .table-record-count {
+    font-size: 11px; font-weight: 500; color: var(--ink-faint);
+    background: var(--surface-alt); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 2px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .table-card-actions { display: flex; gap: 6px; }
+
+  .table-scroll { overflow-x: auto; }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 12.5px;
+  }
+  thead th {
+    background: #f0f4f9;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1.5px solid var(--rule);
+    white-space: nowrap;
+    position: sticky; top: 0;
+  }
+  tbody tr { border-bottom: 1px solid var(--rule); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface); }
+  tbody td {
+    padding: 9px 14px;
+    color: var(--ink);
+    vertical-align: top;
+    font-size: 12.5px;
+    max-width: 300px;
+    word-break: break-word;
+  }
+  .td-mono { font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
+  .td-amount { font-family: 'IBM Plex Mono', monospace; text-align: right; }
+  .td-status-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 10px;
+    font-size: 10.5px; font-weight: 500; white-space: nowrap;
+  }
+
+  /* ── Empty state ── */
+  .empty-state {
+    text-align: center; padding: 56px 24px; color: var(--ink-faint);
+  }
+  .empty-state-icon { font-size: 40px; margin-bottom: 12px; }
+  .empty-state h3 { font-size: 15px; font-weight: 500; color: var(--ink-muted); margin-bottom: 6px; }
+  .empty-state p { font-size: 13px; }
+
+  /* ── Copy feedback ── */
+  .copy-toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--ink); color: white;
+    padding: 10px 18px; border-radius: var(--radius-sm);
+    font-size: 13px; font-weight: 500;
+    opacity: 0; transform: translateY(6px);
+    transition: all 0.22s; pointer-events: none; z-index: 9999;
+    box-shadow: var(--shadow-lg);
+  }
+  .copy-toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ── Loading ── */
+  .loading-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(247,249,252,0.85); z-index: 200;
+    align-items: center; justify-content: center; flex-direction: column; gap: 16px;
+  }
+  .loading-overlay.show { display: flex; }
+  .spinner {
+    width: 36px; height: 36px; border: 3px solid var(--rule);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 14px; font-weight: 500; color: var(--ink-muted); }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .header { padding: 0 16px; }
+    .main { padding: 20px 12px 48px; }
+    .upload-zone { padding: 36px 20px; }
+    .doc-meta.visible { flex-direction: column; align-items: flex-start; }
+    .header-subtitle { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-brand">
+    <div class="header-emblem">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+    </div>
+    <div>
+      <div class="header-title">AIS / TIS / Form 26AS Viewer</div>
+      <div class="header-subtitle">Income Tax Statement Viewer — India</div>
+    </div>
+  </div>
+  <div class="privacy-badge">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+    Processed locally — never uploaded
+  </div>
+</header>
+
+<!-- Loading -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Parsing your statement…</div>
+</div>
+
+<!-- Toast -->
+<div class="copy-toast" id="copyToast">Copied to clipboard</div>
+
+<!-- Main -->
+<main class="main">
+
+  <!-- Upload Section -->
+  <div class="upload-section" id="uploadSection">
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" accept=".json,application/json" multiple/>
+      <div class="upload-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4a5568" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 16 12 12 8 16"/>
+          <line x1="12" y1="12" x2="12" y2="21"/>
+          <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+        </svg>
+      </div>
+      <div class="upload-heading">Upload your tax statement</div>
+      <div class="upload-sub">Drag &amp; drop your JSON file here, or <strong>click to browse</strong></div>
+      <div class="upload-formats">
+        <span class="format-chip">AIS</span>
+        <span class="format-chip">TIS</span>
+        <span class="format-chip">Form 26AS</span>
+        <span class="format-chip">Form 168 (IT Act 2025)</span>
+        <span class="format-chip">.json</span>
+      </div>
+    </div>
+    <div class="privacy-notice">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      </svg>
+      <span>
+        <strong>Your data stays on your device.</strong> All parsing and rendering happens entirely in your browser using local JavaScript. No file content is sent to any server, network, or third party at any point.
+      </span>
+    </div>
+  </div>
+
+  <!-- Error -->
+  <div class="error-box" id="errorBox" style="display:none">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <span id="errorMsg"></span>
+  </div>
+
+  <!-- Doc Meta Bar -->
+  <div class="doc-meta" id="docMeta">
+    <div class="doc-meta-left">
+      <span class="doc-type-badge" id="docTypeBadge"></span>
+      <div class="doc-meta-info">
+        <div class="label">Taxpayer / PAN</div>
+        <div class="value" id="metaTaxpayer">—</div>
+      </div>
+      <div class="doc-meta-info" style="margin-left:20px">
+        <div class="label">Assessment Year</div>
+        <div class="value" id="metaAY">—</div>
+      </div>
+      <div class="doc-meta-info" style="margin-left:20px">
+        <div class="label">Generated On</div>
+        <div class="value" id="metaDate">—</div>
+      </div>
+    </div>
+    <div class="doc-meta-actions">
+      <button class="btn btn-secondary btn-sm" onclick="downloadAllXLSX()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download All (XLSX)
+      </button>
+      <button class="btn btn-secondary btn-sm" onclick="downloadAllCSV()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download All (CSV)
+      </button>
+      <button class="btn btn-ghost btn-sm" onclick="resetApp()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.58"/></svg>
+        Load new file
+      </button>
+    </div>
+  </div>
+
+  <!-- Section Nav -->
+  <div class="section-nav" id="sectionNav"></div>
+
+  <!-- Tables -->
+  <div class="tables-container" id="tablesContainer"></div>
+
+</main>
+
+<script>
+// ─── SheetJS CDN (local-only, bundled inline via script tag) ───
+// We load SheetJS from CDN for XLSX generation; no data leaves the browser.
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+// ═══════════════════════════════════════════════════════
+//  GLOBAL STATE
+// ═══════════════════════════════════════════════════════
+let parsedSections = [];   // [{id, title, headers, rows}]
+let rawDocType = '';
+let docMeta = {};
+
+// ═══════════════════════════════════════════════════════
+//  DRAG & DROP
+// ═══════════════════════════════════════════════════════
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+zone.addEventListener('drop', e => {
+  e.preventDefault(); zone.classList.remove('drag-over');
+  const f = e.dataTransfer.files[0];
+  if (f) handleFile(f);
+});
+document.getElementById('fileInput').addEventListener('change', e => {
+  if (e.target.files[0]) handleFile(e.target.files[0]);
+});
+
+// ═══════════════════════════════════════════════════════
+//  MAIN ENTRY
+// ═══════════════════════════════════════════════════════
+function handleFile(file) {
+  hideError();
+  if (!file.name.toLowerCase().endsWith('.json') && file.type !== 'application/json') {
+    showError('Please upload a valid JSON file (.json)');
+    return;
+  }
+  showLoading();
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const raw = JSON.parse(e.target.result);
+      processJSON(raw, file.name);
+    } catch (err) {
+      hideLoading();
+      showError('Could not parse JSON: ' + err.message + '. Make sure this is a valid JSON export from the ITD portal.');
+    }
+  };
+  reader.onerror = () => { hideLoading(); showError('Failed to read the file.'); };
+  reader.readAsText(file);
+}
+
+// ═══════════════════════════════════════════════════════
+//  JSON DETECTION & ROUTING
+// ═══════════════════════════════════════════════════════
+function processJSON(data, filename) {
+  parsedSections = [];
+  docMeta = {};
+
+  try {
+    // Detect document type
+    const detected = detectDocType(data, filename);
+    rawDocType = detected.type;
+
+    // Extract metadata
+    docMeta = extractMeta(data, detected.type);
+
+    // Route to parser
+    if (detected.type === 'AIS') parseAIS(data);
+    else if (detected.type === 'TIS') parseTIS(data);
+    else if (detected.type === '26AS') parse26AS(data);
+    else parseGeneric(data, filename);
+
+    hideLoading();
+
+    if (parsedSections.length === 0) {
+      showError('No tabular data found in this JSON. The file may be empty or in an unsupported structure.');
+      return;
+    }
+
+    renderUI();
+  } catch (err) {
+    hideLoading();
+    showError('Error processing file: ' + err.message);
+    console.error(err);
+  }
+}
+
+function detectDocType(data, filename) {
+  const fn = filename.toLowerCase();
+  const str = JSON.stringify(data).toLowerCase();
+
+  // Filename hints
+  if (fn.includes('ais')) return { type: 'AIS' };
+  if (fn.includes('tis')) return { type: 'TIS' };
+  if (fn.includes('26as') || fn.includes('form26') || fn.includes('form_26') || fn.includes('form168')) return { type: '26AS' };
+
+  // Content hints
+  if (data.AnnualInformationStatement || data.annualInformationStatement || data.ais || data.AIS) return { type: 'AIS' };
+  if (data.TaxInformationSummary || data.taxInformationSummary || data.tis || data.TIS) return { type: 'TIS' };
+  if (data.Form26AS || data.form26AS || data.form_26as || data.Form168 || data.TaxCreditStatement) return { type: '26AS' };
+  if (str.includes('"annualinformationstatement"') || str.includes('"aisdata"') || str.includes('"information_source"')) return { type: 'AIS' };
+  if (str.includes('"taxinformationsummary"') || str.includes('"tisdata"') || str.includes('"derived_information"')) return { type: 'TIS' };
+  if (str.includes('"form26as"') || str.includes('"partaofform26as"') || str.includes('"tdscollected"') || str.includes('"form168"')) return { type: '26AS' };
+
+  return { type: 'UNKNOWN' };
+}
+
+function extractMeta(data, type) {
+  const meta = {};
+  const search = obj => {
+    if (!obj || typeof obj !== 'object') return;
+    for (const [k, v] of Object.entries(obj)) {
+      const kl = k.toLowerCase();
+      if (typeof v === 'string' || typeof v === 'number') {
+        if (['pan', 'permanentaccountnumber'].includes(kl)) meta.pan = v;
+        if (['name', 'taxpayername', 'assessee_name', 'assesseename', 'fullname'].includes(kl)) meta.name = v;
+        if (['ay', 'assessmentyear', 'assessment_year', 'financialyear', 'financial_year', 'fy'].includes(kl)) meta.ay = v;
+        if (['generatedon', 'generated_on', 'statementdate', 'statement_date', 'createddate', 'created_date', 'downloaddate'].includes(kl)) meta.date = v;
+      }
+    }
+  };
+  // Shallow pass on top-level and first nested level
+  search(data);
+  Object.values(data).forEach(v => { if (v && typeof v === 'object' && !Array.isArray(v)) search(v); });
+  return meta;
+}
+
+// ═══════════════════════════════════════════════════════
+//  AIS PARSER
+// ═══════════════════════════════════════════════════════
+function parseAIS(data) {
+  // The ITD AIS JSON can have various nesting patterns
+  // Common structure: { createdDate, taxpayerInfo, aisData: { [...sections] } }
+  // or flat: { annualInformationStatement: { ... } }
+  
+  const root = data.AnnualInformationStatement || data.annualInformationStatement
+    || data.aisData || data.AISData || data.ais || data.AIS || data;
+
+  // Try to find arrays of transaction data
+  const sections = [
+    { key: ['tdsTcsInformation', 'tds_tcs', 'TDSTCSInformation', 'tdsTcs', 'section_tds'], title: 'TDS / TCS Information', icon: '🏦' },
+    { key: ['salaryInformation', 'salary', 'SalaryInformation', 'section_salary'], title: 'Salary Income', icon: '💼' },
+    { key: ['dividendInformation', 'dividend', 'DividendInformation', 'section_dividend'], title: 'Dividend Income', icon: '📈' },
+    { key: ['interestInformation', 'interest', 'InterestInformation', 'section_interest'], title: 'Interest Income', icon: '🏛️' },
+    { key: ['capitalGains', 'capital_gains', 'CapitalGains', 'section_capital_gains'], title: 'Capital Gains', icon: '📊' },
+    { key: ['mutualFundTransactions', 'mutual_fund', 'MutualFundInformation', 'section_mf'], title: 'Mutual Fund Transactions', icon: '💹' },
+    { key: ['foreignRemittance', 'foreign_remittance', 'ForeignRemittance'], title: 'Foreign Remittance', icon: '🌐' },
+    { key: ['businessReceiptInformation', 'businessReceipt', 'BusinessReceipts'], title: 'Business Receipts', icon: '🧾' },
+    { key: ['sftInformation', 'sft', 'SFTInformation', 'section_sft'], title: 'SFT (Statement of Financial Transactions)', icon: '📋' },
+    { key: ['taxPaymentInformation', 'taxPayments', 'TaxPayments', 'section_tax_payment', 'advanceTax'], title: 'Tax Payments', icon: '💰' },
+    { key: ['refundInformation', 'refund', 'RefundInformation'], title: 'Refunds', icon: '↩️' },
+    { key: ['gstTurnoverInformation', 'gstTurnover', 'GSTTurnover'], title: 'GST Turnover', icon: '📦' },
+    { key: ['profitLossOnSaleOfImmovableProperty', 'immovableProperty', 'ImmovableProperty'], title: 'Immovable Property Transactions', icon: '🏠' },
+    { key: ['otherInformation', 'other', 'OtherInformation', 'miscellaneous'], title: 'Other Information', icon: '📌' },
+  ];
+
+  let found = false;
+  for (const sec of sections) {
+    for (const k of sec.key) {
+      const arr = deepFind(root, k);
+      if (arr && Array.isArray(arr) && arr.length > 0) {
+        addSection(sec.title, arr);
+        found = true;
+        break;
+      }
+    }
+  }
+
+  // Fallback: scan all top-level arrays
+  if (!found || parsedSections.length === 0) {
+    scanAllArrays(root, 'AIS');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  TIS PARSER
+// ═══════════════════════════════════════════════════════
+function parseTIS(data) {
+  const root = data.TaxInformationSummary || data.taxInformationSummary
+    || data.tisData || data.TISData || data.tis || data.TIS || data;
+
+  const sections = [
+    { key: ['salary', 'SalaryInformation', 'salaryDerived'], title: 'Salary', icon: '💼' },
+    { key: ['housePropertyIncome', 'house_property', 'HousePropertyIncome'], title: 'House Property Income', icon: '🏠' },
+    { key: ['businessProfession', 'business', 'BusinessProfession'], title: 'Business / Profession', icon: '🧾' },
+    { key: ['capitalGains', 'CapitalGains', 'capital_gains'], title: 'Capital Gains', icon: '📊' },
+    { key: ['otherSources', 'other_sources', 'OtherSources'], title: 'Other Sources', icon: '📌' },
+    { key: ['grossTotalIncome', 'GrossTotalIncome'], title: 'Gross Total Income', icon: '💰' },
+    { key: ['deductions', 'Deductions', 'chapterViA'], title: 'Deductions (Chapter VI-A)', icon: '🔖' },
+    { key: ['taxableIncome', 'TaxableIncome'], title: 'Taxable Income', icon: '📋' },
+    { key: ['taxLiability', 'TaxLiability', 'tax_liability'], title: 'Tax Liability', icon: '🏛️' },
+    { key: ['tdsTcs', 'TDSTCSInfo', 'tds'], title: 'TDS / TCS', icon: '🏦' },
+    { key: ['taxPaid', 'TaxPaid', 'tax_paid'], title: 'Tax Paid', icon: '💳' },
+    { key: ['taxPayable', 'TaxPayable', 'refund'], title: 'Tax Payable / Refund', icon: '↩️' },
+  ];
+
+  let found = false;
+  for (const sec of sections) {
+    for (const k of sec.key) {
+      const val = deepFind(root, k);
+      if (val !== undefined && val !== null) {
+        if (Array.isArray(val) && val.length > 0) {
+          addSection(sec.title, val); found = true; break;
+        } else if (typeof val === 'object' && !Array.isArray(val)) {
+          addSection(sec.title, [val]); found = true; break;
+        }
+      }
+    }
+  }
+
+  if (!found || parsedSections.length === 0) {
+    scanAllArrays(root, 'TIS');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  FORM 26AS PARSER
+// ═══════════════════════════════════════════════════════
+function parse26AS(data) {
+  const root = data.Form26AS || data.form26AS || data.form_26as
+    || data.Form168 || data.form168 || data.TaxCreditStatement || data;
+
+  const sections = [
+    { key: ['partA', 'PartA', 'part_a', 'tdsByDeductor', 'TDSDetails', 'tdsOnSalary'], title: 'Part A — TDS on Salary (Section 192)', icon: '💼' },
+    { key: ['partA1', 'PartA1', 'part_a1', 'tdsByDeductorOtherThanSalary'], title: 'Part A1 — TDS Other than Salary', icon: '🏦' },
+    { key: ['partA2', 'PartA2', 'part_a2', 'tdsOnSaleOfImmovableProperty'], title: 'Part A2 — TDS on Sale of Immovable Property', icon: '🏠' },
+    { key: ['partB', 'PartB', 'part_b', 'tcsCollected', 'TCSDetails'], title: 'Part B — Tax Collected at Source (TCS)', icon: '🧾' },
+    { key: ['partC', 'PartC', 'part_c', 'taxPaid', 'advanceTaxSelfAssessment'], title: 'Part C — Advance Tax / Self-Assessment Tax', icon: '💰' },
+    { key: ['partD', 'PartD', 'part_d', 'refundDetails', 'refund'], title: 'Part D — Tax Refund', icon: '↩️' },
+    { key: ['partE', 'PartE', 'part_e', 'aiFiscalInformation', 'annualInformation'], title: 'Part E — Annual Information (AIR/SFT)', icon: '📋' },
+    { key: ['partF', 'PartF', 'part_f', 'tdsOnSaleOfProperty'], title: 'Part F — TDS on Sale / Rent (Buyer)', icon: '🏛️' },
+    { key: ['partG', 'PartG', 'part_g', 'tdsDefaultDetails', 'defaults'], title: 'Part G — TDS Defaults', icon: '⚠️' },
+  ];
+
+  let found = false;
+  for (const sec of sections) {
+    for (const k of sec.key) {
+      const val = deepFind(root, k);
+      if (val !== undefined && val !== null) {
+        if (Array.isArray(val) && val.length > 0) {
+          addSection(sec.title, val); found = true; break;
+        } else if (typeof val === 'object' && !Array.isArray(val)) {
+          addSection(sec.title, [val]); found = true; break;
+        }
+      }
+    }
+  }
+
+  if (!found || parsedSections.length === 0) {
+    scanAllArrays(root, '26AS');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+//  GENERIC PARSER (fallback)
+// ═══════════════════════════════════════════════════════
+function parseGeneric(data, filename) {
+  scanAllArrays(data, filename.replace('.json', '').toUpperCase());
+}
+
+// ═══════════════════════════════════════════════════════
+//  HELPERS
+// ═══════════════════════════════════════════════════════
+function deepFind(obj, key) {
+  if (!obj || typeof obj !== 'object') return undefined;
+  if (obj[key] !== undefined) return obj[key];
+  for (const v of Object.values(obj)) {
+    if (v && typeof v === 'object') {
+      const found = deepFind(v, key);
+      if (found !== undefined) return found;
+    }
+  }
+  return undefined;
+}
+
+function scanAllArrays(obj, prefix, depth = 0) {
+  if (!obj || typeof obj !== 'object' || depth > 6) return;
+  for (const [k, v] of Object.entries(obj)) {
+    if (Array.isArray(v) && v.length > 0 && typeof v[0] === 'object') {
+      const title = camelToTitle(k);
+      addSection(title, v);
+    } else if (v && typeof v === 'object' && !Array.isArray(v)) {
+      scanAllArrays(v, prefix, depth + 1);
+    }
+  }
+}
+
+function camelToTitle(str) {
+  return str
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/[_-]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .replace(/\b\w/g, l => l.toUpperCase());
+}
+
+function addSection(title, dataArr) {
+  if (!dataArr || dataArr.length === 0) return;
+  // Flatten array items into header/row structure
+  const allKeys = new Set();
+  dataArr.forEach(row => {
+    if (row && typeof row === 'object') {
+      flatKeys(row).forEach(k => allKeys.add(k));
+    }
+  });
+  const headers = [...allKeys];
+  if (headers.length === 0) return;
+  const rows = dataArr.map(row => headers.map(h => getNestedVal(row, h)));
+  parsedSections.push({
+    id: 'sec_' + parsedSections.length,
+    title,
+    headers: headers.map(h => formatHeader(h)),
+    rawHeaders: headers,
+    rows
+  });
+}
+
+function flatKeys(obj, prefix = '') {
+  const keys = [];
+  for (const [k, v] of Object.entries(obj)) {
+    const full = prefix ? prefix + '.' + k : k;
+    if (v && typeof v === 'object' && !Array.isArray(v)) {
+      keys.push(...flatKeys(v, full));
+    } else {
+      keys.push(full);
+    }
+  }
+  return keys;
+}
+
+function getNestedVal(obj, path) {
+  return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : null), obj);
+}
+
+function formatHeader(k) {
+  const raw = k.includes('.') ? k.split('.').pop() : k;
+  return camelToTitle(raw)
+    .replace(/\bTds\b/gi, 'TDS').replace(/\bTcs\b/gi, 'TCS')
+    .replace(/\bPan\b/gi, 'PAN').replace(/\bAy\b/gi, 'AY')
+    .replace(/\bFy\b/gi, 'FY').replace(/\bItc\b/gi, 'ITC')
+    .replace(/\bGst\b/gi, 'GST').replace(/\bSft\b/gi, 'SFT')
+    .replace(/\bAis\b/gi, 'AIS').replace(/\bTis\b/gi, 'TIS');
+}
+
+function isAmountKey(h) {
+  return /amount|tax|income|credit|deduction|gross|net|total|balance|paid|receivable|payable|rate/i.test(h);
+}
+
+function isDateKey(h) {
+  return /date|period|year|month|quarter/i.test(h);
+}
+
+function formatCell(val, header) {
+  if (val === null || val === undefined || val === '') return '—';
+  if (typeof val === 'boolean') return val ? 'Yes' : 'No';
+  if (typeof val === 'object') return JSON.stringify(val);
+  const str = String(val).trim();
+  // Format numbers as amounts
+  if (isAmountKey(header) && !isNaN(parseFloat(str)) && isFinite(str)) {
+    return '₹' + parseFloat(str).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  return str;
+}
+
+// ═══════════════════════════════════════════════════════
+//  RENDER UI
+// ═══════════════════════════════════════════════════════
+function renderUI() {
+  // Show doc meta
+  const metaEl = document.getElementById('docMeta');
+  metaEl.classList.add('visible');
+  const badgeEl = document.getElementById('docTypeBadge');
+  badgeEl.textContent = rawDocType === 'UNKNOWN' ? 'Tax Statement' : rawDocType;
+  badgeEl.className = 'doc-type-badge ' + ({
+    AIS: 'badge-ais', TIS: 'badge-tis', '26AS': 'badge-26as'
+  }[rawDocType] || 'badge-unknown');
+
+  document.getElementById('metaTaxpayer').textContent =
+    [docMeta.name, docMeta.pan].filter(Boolean).join(' · ') || '—';
+  document.getElementById('metaAY').textContent = docMeta.ay || '—';
+  document.getElementById('metaDate').textContent = docMeta.date || '—';
+
+  // Section nav
+  const nav = document.getElementById('sectionNav');
+  nav.innerHTML = '';
+  nav.classList.add('visible');
+  parsedSections.forEach((sec, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'section-nav-btn' + (i === 0 ? ' active' : '');
+    btn.textContent = sec.title;
+    btn.onclick = () => switchSection(i);
+    nav.appendChild(btn);
+  });
+
+  // Tables
+  const container = document.getElementById('tablesContainer');
+  container.innerHTML = '';
+  parsedSections.forEach((sec, i) => {
+    const block = document.createElement('div');
+    block.className = 'table-block' + (i === 0 ? ' active' : '');
+    block.id = 'block_' + i;
+    block.innerHTML = buildTableHTML(sec, i);
+    container.appendChild(block);
+  });
+
+  // Hide upload zone
+  document.getElementById('uploadSection').style.display = 'none';
+}
+
+function buildTableHTML(sec, idx) {
+  const tableId = 'tbl_' + idx;
+  const rowsHTML = sec.rows.map(row => {
+    const cells = row.map((cell, ci) => {
+      const h = sec.headers[ci];
+      const display = formatCell(cell, h);
+      let cls = '';
+      if (isAmountKey(h)) cls = 'td-amount';
+      else if (isDateKey(h)) cls = 'td-mono';
+      return `<td class="${cls}">${escapeHTML(display)}</td>`;
+    }).join('');
+    return `<tr>${cells}</tr>`;
+  }).join('');
+
+  const headersHTML = sec.headers.map(h => `<th>${escapeHTML(h)}</th>`).join('');
+
+  return `
+  <div class="table-card">
+    <div class="table-card-header">
+      <div class="table-card-title">
+        ${escapeHTML(sec.title)}
+        <span class="table-record-count">${sec.rows.length} record${sec.rows.length !== 1 ? 's' : ''}</span>
+      </div>
+      <div class="table-card-actions">
+        <button class="btn btn-secondary btn-sm" onclick="copyTable(${idx})">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy
+        </button>
+        <button class="btn btn-secondary btn-sm" onclick="downloadCSV(${idx})">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          CSV
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="downloadXLSX(${idx})">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Excel
+        </button>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table id="${tableId}">
+        <thead><tr>${headersHTML}</tr></thead>
+        <tbody>${rowsHTML || '<tr><td colspan="' + sec.headers.length + '" style="text-align:center;color:var(--ink-faint);padding:24px">No records</td></tr>'}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '—';
+  return String(str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+function switchSection(idx) {
+  document.querySelectorAll('.table-block').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.section-nav-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('block_' + idx).classList.add('active');
+  document.querySelectorAll('.section-nav-btn')[idx].classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════
+//  COPY
+// ═══════════════════════════════════════════════════════
+function copyTable(idx) {
+  const sec = parsedSections[idx];
+  const lines = [sec.headers.join('\t')];
+  sec.rows.forEach(row => {
+    lines.push(row.map(c => c === null || c === undefined ? '' : String(c)).join('\t'));
+  });
+  navigator.clipboard.writeText(lines.join('\n')).then(() => showToast('Table copied to clipboard!')).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = lines.join('\n');
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('Table copied to clipboard!');
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+//  CSV DOWNLOAD
+// ═══════════════════════════════════════════════════════
+function rowToCSV(row) {
+  return row.map(cell => {
+    const s = cell === null || cell === undefined ? '' : String(cell);
+    if (s.includes(',') || s.includes('"') || s.includes('\n')) return '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }).join(',');
+}
+
+function downloadCSV(idx) {
+  const sec = parsedSections[idx];
+  const csv = [rowToCSV(sec.headers), ...sec.rows.map(rowToCSV)].join('\r\n');
+  const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
+  triggerDownload(blob, sanitizeFilename(sec.title) + '.csv');
+}
+
+function downloadAllCSV() {
+  parsedSections.forEach((_, i) => downloadCSV(i));
+}
+
+// ═══════════════════════════════════════════════════════
+//  XLSX DOWNLOAD
+// ═══════════════════════════════════════════════════════
+function downloadXLSX(idx) {
+  const sec = parsedSections[idx];
+  const wb = XLSX.utils.book_new();
+  const wsData = [sec.headers, ...sec.rows.map(row =>
+    row.map(c => c === null || c === undefined ? '' : c)
+  )];
+  const ws = XLSX.utils.aoa_to_sheet(wsData);
+
+  // Column widths
+  ws['!cols'] = sec.headers.map((h, ci) => {
+    const maxLen = Math.max(h.length, ...sec.rows.map(r => String(r[ci] || '').length));
+    return { wch: Math.min(Math.max(maxLen + 2, 10), 45) };
+  });
+
+  // Style header row (freeze + bold via xlsx)
+  ws['!freeze'] = { xSplit: 0, ySplit: 1 };
+
+  XLSX.utils.book_append_sheet(wb, ws, sec.title.substring(0, 31));
+  XLSX.writeFile(wb, sanitizeFilename(sec.title) + '.xlsx');
+}
+
+function downloadAllXLSX() {
+  const wb = XLSX.utils.book_new();
+  parsedSections.forEach(sec => {
+    const wsData = [sec.headers, ...sec.rows.map(row =>
+      row.map(c => c === null || c === undefined ? '' : c)
+    )];
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    ws['!cols'] = sec.headers.map((h, ci) => {
+      const maxLen = Math.max(h.length, ...sec.rows.map(r => String(r[ci] || '').length));
+      return { wch: Math.min(Math.max(maxLen + 2, 10), 45) };
+    });
+    ws['!freeze'] = { xSplit: 0, ySplit: 1 };
+    const sheetName = sec.title.substring(0, 31);
+    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+  });
+  const name = (rawDocType || 'TaxStatement') + '_Export';
+  XLSX.writeFile(wb, sanitizeFilename(name) + '.xlsx');
+}
+
+function sanitizeFilename(str) {
+  return str.replace(/[^a-zA-Z0-9_\-\s]/g, '').replace(/\s+/g, '_').substring(0, 60) || 'export';
+}
+
+function triggerDownload(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// ═══════════════════════════════════════════════════════
+//  UI HELPERS
+// ═══════════════════════════════════════════════════════
+function showLoading() { document.getElementById('loadingOverlay').classList.add('show'); }
+function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
+
+function showError(msg) {
+  const box = document.getElementById('errorBox');
+  document.getElementById('errorMsg').textContent = msg;
+  box.style.display = 'flex';
+}
+function hideError() { document.getElementById('errorBox').style.display = 'none'; }
+
+function showToast(msg) {
+  const t = document.getElementById('copyToast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function resetApp() {
+  parsedSections = [];
+  rawDocType = '';
+  docMeta = {};
+  document.getElementById('uploadSection').style.display = '';
+  document.getElementById('docMeta').classList.remove('visible');
+  document.getElementById('sectionNav').classList.remove('visible');
+  document.getElementById('sectionNav').innerHTML = '';
+  document.getElementById('tablesContainer').innerHTML = '';
+  document.getElementById('fileInput').value = '';
+  hideError();
+}
+</script>
+</body>
+</html>
