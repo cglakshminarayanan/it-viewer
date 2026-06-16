@@ -55,114 +55,115 @@
     z-index: 100;
     box-shadow: var(--shadow-sm);
   }
-  .header-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .header-brand { display: flex; align-items: center; gap: 12px; }
   .header-emblem {
-    width: 36px;
-    height: 36px;
-    background: var(--accent);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+    width: 36px; height: 36px; background: var(--accent);
+    border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .header-emblem svg { color: white; }
-  .header-title {
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-  }
-  .header-subtitle {
-    font-size: 11px;
-    color: var(--ink-faint);
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-  }
+  .header-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+  .header-subtitle { font-size: 11px; color: var(--ink-faint); font-weight: 400; letter-spacing: 0.03em; text-transform: uppercase; }
   .privacy-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--safe-light);
-    color: var(--safe);
-    border: 1px solid #b7e3d4;
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
+    display: flex; align-items: center; gap: 6px;
+    background: var(--safe-light); color: var(--safe);
+    border: 1px solid #b7e3d4; border-radius: 20px;
+    padding: 5px 12px; font-size: 11px; font-weight: 500; letter-spacing: 0.02em;
   }
-  .privacy-badge svg { flex-shrink: 0; }
 
-  /* ── Main layout ── */
+  /* ── Main ── */
   .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
 
   /* ── Upload zone ── */
-  .upload-section { margin-bottom: 32px; }
-
+  .upload-section { margin-bottom: 24px; }
   .upload-zone {
-    border: 2px dashed #c5cfd9;
-    border-radius: var(--radius);
-    background: var(--white);
-    padding: 52px 32px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+    border: 2px dashed #c5cfd9; border-radius: var(--radius);
+    background: var(--white); padding: 48px 32px;
+    text-align: center; cursor: pointer; transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
     position: relative;
   }
   .upload-zone:hover, .upload-zone.drag-over {
-    border-color: var(--accent);
-    background: var(--accent-light);
+    border-color: var(--accent); background: var(--accent-light);
     box-shadow: 0 0 0 4px rgba(26,86,219,0.07);
   }
   .upload-zone input[type="file"] {
     position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
   }
   .upload-icon {
-    width: 52px; height: 52px;
-    background: var(--surface);
-    border-radius: 50%;
+    width: 52px; height: 52px; background: var(--surface); border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px;
-    border: 1.5px solid var(--rule);
+    margin: 0 auto 16px; border: 1.5px solid var(--rule);
   }
   .upload-heading { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
   .upload-sub { font-size: 13px; color: var(--ink-muted); }
   .upload-sub strong { color: var(--accent); font-weight: 500; }
-  .upload-formats {
-    display: flex; gap: 8px; justify-content: center; margin-top: 20px; flex-wrap: wrap;
-  }
+  .upload-formats { display: flex; gap: 8px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
   .format-chip {
-    background: var(--surface-alt);
-    border: 1px solid var(--rule);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-muted);
-    font-family: 'IBM Plex Mono', monospace;
-    letter-spacing: 0.04em;
+    background: var(--surface-alt); border: 1px solid var(--rule);
+    border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 500;
+    color: var(--ink-muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.04em;
   }
+
+  /* ── How-to note ── */
+  .howto-note {
+    margin-top: 12px; background: var(--warn-light); border: 1px solid #fad7a0;
+    border-radius: var(--radius-sm); padding: 12px 16px;
+    display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; color: var(--warn);
+  }
+  .howto-note svg { flex-shrink: 0; margin-top: 2px; }
+  .howto-note a { color: var(--warn); text-decoration: underline; }
 
   /* ── Privacy notice ── */
   .privacy-notice {
-    margin-top: 16px;
-    background: var(--safe-light);
-    border: 1px solid #b7e3d4;
-    border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 12.5px;
-    color: var(--safe);
+    margin-top: 10px; background: var(--safe-light); border: 1px solid #b7e3d4;
+    border-radius: var(--radius-sm); padding: 12px 16px;
+    display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; color: var(--safe);
   }
   .privacy-notice svg { flex-shrink: 0; margin-top: 1px; }
+
+  /* ── Password modal ── */
+  .modal-backdrop {
+    display: none; position: fixed; inset: 0;
+    background: rgba(15,25,35,0.55); z-index: 300;
+    align-items: center; justify-content: center; padding: 16px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-backdrop.show { display: flex; }
+  .modal {
+    background: var(--white); border-radius: 10px;
+    padding: 28px 28px 24px; width: 100%; max-width: 440px;
+    box-shadow: var(--shadow-lg); animation: modalIn 0.18s ease;
+  }
+  @keyframes modalIn { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .modal-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .modal-desc { font-size: 13px; color: var(--ink-muted); margin-bottom: 20px; line-height: 1.6; }
+  .modal-desc code {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px;
+    background: var(--surface-alt); padding: 2px 6px; border-radius: 3px; color: var(--ink);
+  }
+
+  .input-group { margin-bottom: 14px; }
+  .input-label { font-size: 12px; font-weight: 500; color: var(--ink-muted); margin-bottom: 5px; display: block; letter-spacing: 0.03em; text-transform: uppercase; }
+  .input-row { display: flex; gap: 8px; }
+  .text-input {
+    flex: 1; padding: 9px 12px; border: 1.5px solid var(--rule);
+    border-radius: var(--radius-sm); font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; background: var(--white); color: var(--ink);
+    outline: none; transition: border-color 0.14s;
+  }
+  .text-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,86,219,0.1); }
+  .text-input::placeholder { color: var(--ink-faint); font-family: 'IBM Plex Sans', sans-serif; }
+  .text-input.error-field { border-color: var(--danger); }
+
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
+  .modal-error { margin-top: 10px; font-size: 12.5px; color: var(--danger); display: none; }
+  .modal-error.show { display: block; }
+
+  .show-hide-btn {
+    padding: 9px 12px; border: 1.5px solid var(--rule); border-radius: var(--radius-sm);
+    background: var(--white); cursor: pointer; color: var(--ink-muted); font-size: 12px;
+    display: flex; align-items: center; gap: 4px; white-space: nowrap; flex-shrink: 0;
+  }
+  .show-hide-btn:hover { background: var(--surface-alt); }
 
   /* ── Error box ── */
   .error-box {
@@ -173,18 +174,13 @@
   }
   .error-box svg { flex-shrink: 0; margin-top: 1px; }
 
-  /* ── Document meta ── */
+  /* ── Doc meta ── */
   .doc-meta {
-    display: none;
-    background: var(--white);
-    border: 1.5px solid var(--rule);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-sm);
+    display: none; background: var(--white); border: 1.5px solid var(--rule);
+    border-radius: var(--radius); padding: 18px 24px; margin-bottom: 20px; box-shadow: var(--shadow-sm);
   }
   .doc-meta.visible { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-  .doc-meta-left { display: flex; align-items: center; gap: 14px; }
+  .doc-meta-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
   .doc-type-badge {
     font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
     text-transform: uppercase; padding: 4px 10px;
@@ -196,7 +192,7 @@
   .badge-unknown { background: var(--surface-alt); color: var(--ink-muted); border: 1px solid var(--rule); }
   .doc-meta-info { font-size: 13px; }
   .doc-meta-info .label { color: var(--ink-faint); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
-  .doc-meta-info .value { font-weight: 500; font-size: 14px; }
+  .doc-meta-info .value { font-weight: 500; font-size: 13px; }
   .doc-meta-actions { display: flex; gap: 8px; flex-wrap: wrap; }
 
   /* ── Buttons ── */
@@ -206,7 +202,6 @@
     font-size: 13px; font-weight: 500; cursor: pointer;
     border: 1.5px solid transparent; transition: all 0.14s;
     font-family: inherit; white-space: nowrap;
-    text-decoration: none;
   }
   .btn-primary { background: var(--accent); color: white; border-color: var(--accent); }
   .btn-primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
@@ -215,18 +210,12 @@
   .btn-ghost { background: transparent; color: var(--accent); border-color: transparent; padding: 8px 10px; }
   .btn-ghost:hover { background: var(--accent-light); }
   .btn-sm { padding: 5px 11px; font-size: 12px; }
-  .btn svg { flex-shrink: 0; }
 
   /* ── Section nav ── */
   .section-nav {
-    display: none;
-    gap: 4px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    background: var(--white);
-    border: 1.5px solid var(--rule);
-    border-radius: var(--radius);
-    padding: 8px;
+    display: none; gap: 4px; flex-wrap: wrap; margin-bottom: 20px;
+    background: var(--white); border: 1.5px solid var(--rule);
+    border-radius: var(--radius); padding: 8px;
   }
   .section-nav.visible { display: flex; }
   .section-nav-btn {
@@ -238,95 +227,45 @@
   .section-nav-btn.active { background: var(--accent); color: white; }
 
   /* ── Tables ── */
-  .tables-container { display: flex; flex-direction: column; gap: 28px; }
+  .tables-container { display: flex; flex-direction: column; gap: 20px; }
   .table-block { display: none; }
   .table-block.active { display: block; }
-
   .table-card {
-    background: var(--white);
-    border: 1.5px solid var(--rule);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-sm);
-    overflow: hidden;
+    background: var(--white); border: 1.5px solid var(--rule);
+    border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden;
   }
   .table-card-header {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 20px;
-    border-bottom: 1.5px solid var(--rule);
-    background: var(--surface);
-    gap: 12px; flex-wrap: wrap;
+    padding: 12px 18px; border-bottom: 1.5px solid var(--rule);
+    background: var(--surface); gap: 12px; flex-wrap: wrap;
   }
-  .table-card-title {
-    font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;
-  }
+  .table-card-title { font-size: 13.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
   .table-record-count {
     font-size: 11px; font-weight: 500; color: var(--ink-faint);
     background: var(--surface-alt); border: 1px solid var(--rule);
-    border-radius: 10px; padding: 2px 8px;
-    font-family: 'IBM Plex Mono', monospace;
+    border-radius: 10px; padding: 2px 8px; font-family: 'IBM Plex Mono', monospace;
   }
   .table-card-actions { display: flex; gap: 6px; }
-
   .table-scroll { overflow-x: auto; }
-  table {
-    width: 100%; border-collapse: collapse; font-size: 12.5px;
-  }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
   thead th {
-    background: #f0f4f9;
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 10px 14px;
-    text-align: left;
-    border-bottom: 1.5px solid var(--rule);
-    white-space: nowrap;
-    position: sticky; top: 0;
+    background: #f0f4f9; color: var(--ink); font-weight: 600;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 9px 14px; text-align: left; border-bottom: 1.5px solid var(--rule);
+    white-space: nowrap; position: sticky; top: 0;
   }
   tbody tr { border-bottom: 1px solid var(--rule); }
   tbody tr:last-child { border-bottom: none; }
   tbody tr:hover { background: var(--surface); }
-  tbody td {
-    padding: 9px 14px;
-    color: var(--ink);
-    vertical-align: top;
-    font-size: 12.5px;
-    max-width: 300px;
-    word-break: break-word;
-  }
+  tbody td { padding: 8px 14px; color: var(--ink); vertical-align: top; max-width: 280px; word-break: break-word; }
   .td-mono { font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
   .td-amount { font-family: 'IBM Plex Mono', monospace; text-align: right; }
-  .td-status-badge {
-    display: inline-block; padding: 2px 8px; border-radius: 10px;
-    font-size: 10.5px; font-weight: 500; white-space: nowrap;
-  }
-
-  /* ── Empty state ── */
-  .empty-state {
-    text-align: center; padding: 56px 24px; color: var(--ink-faint);
-  }
-  .empty-state-icon { font-size: 40px; margin-bottom: 12px; }
-  .empty-state h3 { font-size: 15px; font-weight: 500; color: var(--ink-muted); margin-bottom: 6px; }
-  .empty-state p { font-size: 13px; }
-
-  /* ── Copy feedback ── */
-  .copy-toast {
-    position: fixed; bottom: 24px; right: 24px;
-    background: var(--ink); color: white;
-    padding: 10px 18px; border-radius: var(--radius-sm);
-    font-size: 13px; font-weight: 500;
-    opacity: 0; transform: translateY(6px);
-    transition: all 0.22s; pointer-events: none; z-index: 9999;
-    box-shadow: var(--shadow-lg);
-  }
-  .copy-toast.show { opacity: 1; transform: translateY(0); }
 
   /* ── Loading ── */
   .loading-overlay {
     display: none; position: fixed; inset: 0;
-    background: rgba(247,249,252,0.85); z-index: 200;
-    align-items: center; justify-content: center; flex-direction: column; gap: 16px;
+    background: rgba(247,249,252,0.88); z-index: 200;
+    align-items: center; justify-content: center; flex-direction: column; gap: 14px;
   }
   .loading-overlay.show { display: flex; }
   .spinner {
@@ -337,13 +276,24 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   .loading-text { font-size: 14px; font-weight: 500; color: var(--ink-muted); }
 
+  /* ── Copy toast ── */
+  .copy-toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--ink); color: white; padding: 10px 18px;
+    border-radius: var(--radius-sm); font-size: 13px; font-weight: 500;
+    opacity: 0; transform: translateY(6px); transition: all 0.22s;
+    pointer-events: none; z-index: 9999; box-shadow: var(--shadow-lg);
+  }
+  .copy-toast.show { opacity: 1; transform: translateY(0); }
+
   /* ── Responsive ── */
   @media (max-width: 640px) {
     .header { padding: 0 16px; }
     .main { padding: 20px 12px 48px; }
-    .upload-zone { padding: 36px 20px; }
+    .upload-zone { padding: 36px 16px; }
     .doc-meta.visible { flex-direction: column; align-items: flex-start; }
     .header-subtitle { display: none; }
+    .modal { padding: 22px 18px 18px; }
   }
 </style>
 </head>
@@ -377,11 +327,58 @@
 <!-- Loading -->
 <div class="loading-overlay" id="loadingOverlay">
   <div class="spinner"></div>
-  <div class="loading-text">Parsing your statement…</div>
+  <div class="loading-text" id="loadingText">Parsing your statement…</div>
 </div>
 
-<!-- Toast -->
+<!-- Copy Toast -->
 <div class="copy-toast" id="copyToast">Copied to clipboard</div>
+
+<!-- Password Modal -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <div class="modal-title">🔐 Enter your decryption password</div>
+    <div class="modal-desc">
+      The ITD portal encrypts AIS/TIS JSON downloads. Enter your credentials to decrypt it locally — your password is never transmitted anywhere.<br><br>
+      <strong>Password format:</strong> PAN in lowercase + Date of birth<br>
+      Example: <code>abcde1234f01011990</code><br><br>
+      <strong>PAN:</strong> lowercase letters e.g. <code>abcde1234f</code><br>
+      <strong>DOB:</strong> DDMMYYYY e.g. <code>01011990</code> for Jan 1, 1990
+    </div>
+
+    <div class="input-group">
+      <label class="input-label" for="inputPAN">PAN (lowercase)</label>
+      <input type="text" id="inputPAN" class="text-input" placeholder="abcde1234f" maxlength="10" autocomplete="off" spellcheck="false"/>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="inputDOB">Date of Birth (DDMMYYYY)</label>
+      <input type="text" id="inputDOB" class="text-input" placeholder="01011990" maxlength="8" autocomplete="off" spellcheck="false"/>
+    </div>
+    <div class="input-group">
+      <label class="input-label">Full password preview</label>
+      <div class="input-row">
+        <input type="password" id="pwdPreview" class="text-input" readonly placeholder="Will auto-fill from PAN + DOB above"/>
+        <button class="show-hide-btn" id="showHideBtn" onclick="togglePwdVisibility()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="eyeIcon">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          Show
+        </button>
+      </div>
+      <div style="font-size:11.5px;color:var(--ink-faint);margin-top:5px">Or type a full custom password directly in the field above if you know it.</div>
+    </div>
+
+    <div class="modal-error" id="modalError"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="decryptBtn" onclick="attemptDecrypt()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        Decrypt &amp; View
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- Main -->
 <main class="main">
@@ -392,8 +389,7 @@
       <input type="file" id="fileInput" accept=".json,application/json" multiple/>
       <div class="upload-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4a5568" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="16 16 12 12 8 16"/>
-          <line x1="12" y1="12" x2="12" y2="21"/>
+          <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
           <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
         </svg>
       </div>
@@ -407,12 +403,22 @@
         <span class="format-chip">.json</span>
       </div>
     </div>
+
+    <div class="howto-note">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <span>
+        <strong>How to get your AIS/TIS JSON:</strong> Log in to <a href="https://www.incometax.gov.in" target="_blank" rel="noopener">incometax.gov.in</a> → Services → AIS → Proceed → Select Financial Year → Download icon → JSON format. The downloaded file is encrypted — this viewer will decrypt it locally using your PAN + date of birth.
+      </span>
+    </div>
+
     <div class="privacy-notice">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
       </svg>
       <span>
-        <strong>Your data stays on your device.</strong> All parsing and rendering happens entirely in your browser using local JavaScript. No file content is sent to any server, network, or third party at any point.
+        <strong>100% private.</strong> Your file and password never leave your browser. Decryption uses the Web Crypto API built into your browser. No network calls are made — you can verify this in DevTools → Network.
       </span>
     </div>
   </div>
@@ -422,7 +428,10 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
     </svg>
-    <span id="errorMsg"></span>
+    <div>
+      <span id="errorMsg"></span>
+      <div id="errorHint" style="margin-top:5px;font-size:12px;opacity:0.85;display:none"></div>
+    </div>
   </div>
 
   <!-- Doc Meta Bar -->
@@ -433,27 +442,27 @@
         <div class="label">Taxpayer / PAN</div>
         <div class="value" id="metaTaxpayer">—</div>
       </div>
-      <div class="doc-meta-info" style="margin-left:20px">
+      <div class="doc-meta-info" style="margin-left:16px">
         <div class="label">Assessment Year</div>
         <div class="value" id="metaAY">—</div>
       </div>
-      <div class="doc-meta-info" style="margin-left:20px">
+      <div class="doc-meta-info" style="margin-left:16px">
         <div class="label">Generated On</div>
         <div class="value" id="metaDate">—</div>
       </div>
     </div>
     <div class="doc-meta-actions">
       <button class="btn btn-secondary btn-sm" onclick="downloadAllXLSX()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download All (XLSX)
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        All (XLSX)
       </button>
       <button class="btn btn-secondary btn-sm" onclick="downloadAllCSV()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download All (CSV)
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        All (CSV)
       </button>
       <button class="btn btn-ghost btn-sm" onclick="resetApp()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.58"/></svg>
-        Load new file
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.58"/></svg>
+        New file
       </button>
     </div>
   </div>
@@ -466,23 +475,22 @@
 
 </main>
 
-<script>
-// ─── SheetJS CDN (local-only, bundled inline via script tag) ───
-// We load SheetJS from CDN for XLSX generation; no data leaves the browser.
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
 <script>
-// ═══════════════════════════════════════════════════════
+'use strict';
+
+// ═══════════════════════════════════════════════════════════════════
 //  GLOBAL STATE
-// ═══════════════════════════════════════════════════════
-let parsedSections = [];   // [{id, title, headers, rows}]
+// ═══════════════════════════════════════════════════════════════════
+let parsedSections = [];
 let rawDocType = '';
 let docMeta = {};
+let pendingRawText = null;   // raw file text waiting for password
+let pendingFilename = '';
 
-// ═══════════════════════════════════════════════════════
-//  DRAG & DROP
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+//  DRAG & DROP / FILE INPUT
+// ═══════════════════════════════════════════════════════════════════
 const zone = document.getElementById('uploadZone');
 zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
 zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
@@ -495,46 +503,234 @@ document.getElementById('fileInput').addEventListener('change', e => {
   if (e.target.files[0]) handleFile(e.target.files[0]);
 });
 
-// ═══════════════════════════════════════════════════════
-//  MAIN ENTRY
-// ═══════════════════════════════════════════════════════
+// Auto-build password preview from PAN + DOB
+['inputPAN','inputDOB'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updatePwdPreview);
+});
+function updatePwdPreview() {
+  const pan = document.getElementById('inputPAN').value.trim().toLowerCase();
+  const dob = document.getElementById('inputDOB').value.trim();
+  document.getElementById('pwdPreview').value = pan + dob;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  MAIN ENTRY — detect format, route to decryptor or parser
+// ═══════════════════════════════════════════════════════════════════
 function handleFile(file) {
   hideError();
   if (!file.name.toLowerCase().endsWith('.json') && file.type !== 'application/json') {
-    showError('Please upload a valid JSON file (.json)');
-    return;
+    showError('Please upload a .json file.', ''); return;
   }
-  showLoading();
+  showLoading('Reading file…');
   const reader = new FileReader();
   reader.onload = e => {
+    const raw = e.target.result.trim();
+    pendingFilename = file.name;
+    hideLoading();
+
+    // ── Case 1: looks like hex-encoded encrypted payload ──────────
+    if (/^[0-9a-fA-F]{32,}$/.test(raw)) {
+      pendingRawText = raw;
+      openModal();
+      return;
+    }
+
+    // ── Case 2: plain JSON ────────────────────────────────────────
     try {
-      const raw = JSON.parse(e.target.result);
-      processJSON(raw, file.name);
+      const parsed = JSON.parse(raw);
+      processJSON(parsed, file.name);
     } catch (err) {
-      hideLoading();
-      showError('Could not parse JSON: ' + err.message + '. Make sure this is a valid JSON export from the ITD portal.');
+      // Could still be encrypted with non-hex encoding; offer password anyway
+      pendingRawText = raw;
+      showError(
+        'This file is not plain JSON — it appears to be encrypted.',
+        'Click below to enter your PAN + date of birth password to decrypt it.'
+      );
+      // Show a decrypt button inline
+      document.getElementById('errorHint').innerHTML =
+        '<button class="btn btn-primary btn-sm" onclick="openModal()" style="margin-top:8px">🔐 Enter password to decrypt</button>';
+      document.getElementById('errorHint').style.display = 'block';
     }
   };
-  reader.onerror = () => { hideLoading(); showError('Failed to read the file.'); };
+  reader.onerror = () => { hideLoading(); showError('Failed to read the file.', ''); };
   reader.readAsText(file);
 }
 
-// ═══════════════════════════════════════════════════════
-//  JSON DETECTION & ROUTING
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+//  PASSWORD MODAL
+// ═══════════════════════════════════════════════════════════════════
+function openModal() {
+  document.getElementById('modalError').classList.remove('show');
+  document.getElementById('modalBackdrop').classList.add('show');
+  document.getElementById('inputPAN').focus();
+}
+function closeModal() {
+  document.getElementById('modalBackdrop').classList.remove('show');
+}
+function togglePwdVisibility() {
+  const inp = document.getElementById('pwdPreview');
+  const btn = document.getElementById('showHideBtn');
+  const isHidden = inp.type === 'password';
+  inp.type = isHidden ? 'text' : 'password';
+  btn.innerHTML = isHidden
+    ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg> Hide'
+    : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg> Show';
+}
+
+async function attemptDecrypt() {
+  const panVal = document.getElementById('inputPAN').value.trim().toLowerCase();
+  const dobVal = document.getElementById('inputDOB').value.trim();
+  // Allow either auto-combined or manually typed into pwdPreview
+  let password = document.getElementById('pwdPreview').value.trim();
+  if (!password) password = panVal + dobVal;
+
+  if (!password) {
+    showModalError('Please enter your PAN and date of birth (or full password).');
+    return;
+  }
+
+  const errEl = document.getElementById('modalError');
+  errEl.classList.remove('show');
+  document.getElementById('decryptBtn').disabled = true;
+  document.getElementById('decryptBtn').textContent = 'Decrypting…';
+
+  try {
+    const jsonText = await decryptAISPayload(pendingRawText, password);
+    closeModal();
+    document.getElementById('decryptBtn').disabled = false;
+    document.getElementById('decryptBtn').innerHTML = '🔓 Decrypt &amp; View';
+    const parsed = JSON.parse(jsonText);
+    processJSON(parsed, pendingFilename);
+  } catch (err) {
+    document.getElementById('decryptBtn').disabled = false;
+    document.getElementById('decryptBtn').innerHTML = '🔐 Decrypt &amp; View';
+    showModalError('Decryption failed. Check your PAN (lowercase) and date of birth (DDMMYYYY). ' + err.message);
+  }
+}
+
+function showModalError(msg) {
+  const el = document.getElementById('modalError');
+  el.textContent = '⚠ ' + msg;
+  el.classList.add('show');
+}
+
+// Enter key submits modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('modalBackdrop').classList.contains('show')) {
+    attemptDecrypt();
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════════
+//  DECRYPTION ENGINE
+//  ITD AIS/TIS JSON is: hex(AES-256-CBC(gzip(json), key, iv))
+//  key = first 32 bytes of SHA-256(password)  [sometimes PBKDF2]
+//  iv  = first 16 bytes of SHA-256(password)
+//  Some older files use: hex(AES-256-CBC(json)) without gzip
+// ═══════════════════════════════════════════════════════════════════
+async function decryptAISPayload(hexOrRaw, password) {
+  const pwdBytes = new TextEncoder().encode(password);
+
+  // Derive key material from password using SHA-256
+  const hashBuf = await crypto.subtle.digest('SHA-256', pwdBytes);
+  const keyBytes = new Uint8Array(hashBuf);        // 32 bytes
+  const iv       = keyBytes.slice(0, 16);          // first 16 bytes as IV
+
+  const cryptoKey = await crypto.subtle.importKey(
+    'raw', keyBytes, { name: 'AES-CBC' }, false, ['decrypt']
+  );
+
+  // Convert hex string to bytes
+  const cipherBytes = hexToBytes(hexOrRaw);
+
+  // Attempt 1: AES-256-CBC decrypt → then try gzip decompress → then plain UTF-8
+  let decrypted;
+  try {
+    decrypted = await crypto.subtle.decrypt({ name: 'AES-CBC', iv }, cryptoKey, cipherBytes);
+  } catch (e) {
+    throw new Error('Wrong password or unsupported encryption. (' + e.message + ')');
+  }
+
+  const decryptedBytes = new Uint8Array(decrypted);
+
+  // Attempt gzip decompress first (most ITD files are gzip'd after encryption)
+  try {
+    const ds = new DecompressionStream('gzip');
+    const writer = ds.writable.getWriter();
+    const reader = ds.readable.getReader();
+    writer.write(decryptedBytes);
+    writer.close();
+    const chunks = [];
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+    }
+    const total = chunks.reduce((a, c) => a + c.length, 0);
+    const out = new Uint8Array(total);
+    let offset = 0;
+    for (const c of chunks) { out.set(c, offset); offset += c.length; }
+    const text = new TextDecoder('utf-8').decode(out);
+    // Validate it looks like JSON
+    if (text.trim().startsWith('{') || text.trim().startsWith('[')) return text;
+  } catch (_) {
+    // Not gzip — try raw UTF-8
+  }
+
+  // Attempt deflate (zlib)
+  try {
+    const ds = new DecompressionStream('deflate');
+    const writer = ds.writable.getWriter();
+    const reader = ds.readable.getReader();
+    writer.write(decryptedBytes);
+    writer.close();
+    const chunks = [];
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      chunks.push(value);
+    }
+    const total = chunks.reduce((a, c) => a + c.length, 0);
+    const out = new Uint8Array(total);
+    let offset = 0;
+    for (const c of chunks) { out.set(c, offset); offset += c.length; }
+    const text = new TextDecoder('utf-8').decode(out);
+    if (text.trim().startsWith('{') || text.trim().startsWith('[')) return text;
+  } catch (_) {}
+
+  // No compression — raw decrypted bytes might be JSON directly
+  const rawText = new TextDecoder('utf-8').decode(decryptedBytes).trim();
+  // Strip PKCS7 padding artifacts
+  const cleaned = rawText.replace(/[\x00-\x08\x0e-\x1f\x7f-\x9f]+$/g, '').trim();
+  if (cleaned.startsWith('{') || cleaned.startsWith('[')) return cleaned;
+
+  throw new Error('Decrypted content is not valid JSON. The password may be incorrect.');
+}
+
+function hexToBytes(hex) {
+  hex = hex.replace(/\s+/g, '');
+  if (hex.length % 2 !== 0) hex = '0' + hex;
+  const bytes = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < bytes.length; i++) {
+    bytes[i] = parseInt(hex.substr(i * 2, 2), 16);
+  }
+  return bytes;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  JSON PROCESSING
+// ═══════════════════════════════════════════════════════════════════
 function processJSON(data, filename) {
   parsedSections = [];
   docMeta = {};
+  hideError();
+  showLoading('Analysing statement…');
 
   try {
-    // Detect document type
     const detected = detectDocType(data, filename);
     rawDocType = detected.type;
-
-    // Extract metadata
     docMeta = extractMeta(data, detected.type);
 
-    // Route to parser
     if (detected.type === 'AIS') parseAIS(data);
     else if (detected.type === 'TIS') parseTIS(data);
     else if (detected.type === '26AS') parse26AS(data);
@@ -543,35 +739,30 @@ function processJSON(data, filename) {
     hideLoading();
 
     if (parsedSections.length === 0) {
-      showError('No tabular data found in this JSON. The file may be empty or in an unsupported structure.');
+      showError('No tabular data found in this JSON. The file may be empty or use an unsupported structure.', '');
       return;
     }
-
     renderUI();
   } catch (err) {
     hideLoading();
-    showError('Error processing file: ' + err.message);
+    showError('Error processing: ' + err.message, '');
     console.error(err);
   }
 }
 
 function detectDocType(data, filename) {
   const fn = filename.toLowerCase();
-  const str = JSON.stringify(data).toLowerCase();
-
-  // Filename hints
   if (fn.includes('ais')) return { type: 'AIS' };
   if (fn.includes('tis')) return { type: 'TIS' };
-  if (fn.includes('26as') || fn.includes('form26') || fn.includes('form_26') || fn.includes('form168')) return { type: '26AS' };
+  if (fn.includes('26as') || fn.includes('form26') || fn.includes('form168')) return { type: '26AS' };
 
-  // Content hints
-  if (data.AnnualInformationStatement || data.annualInformationStatement || data.ais || data.AIS) return { type: 'AIS' };
-  if (data.TaxInformationSummary || data.taxInformationSummary || data.tis || data.TIS) return { type: 'TIS' };
-  if (data.Form26AS || data.form26AS || data.form_26as || data.Form168 || data.TaxCreditStatement) return { type: '26AS' };
+  const str = JSON.stringify(data).toLowerCase();
+  if (data.AnnualInformationStatement || data.annualInformationStatement || data.aisData || data.AIS) return { type: 'AIS' };
+  if (data.TaxInformationSummary || data.taxInformationSummary || data.tisData || data.TIS) return { type: 'TIS' };
+  if (data.Form26AS || data.form26AS || data.Form168 || data.TaxCreditStatement) return { type: '26AS' };
   if (str.includes('"annualinformationstatement"') || str.includes('"aisdata"') || str.includes('"information_source"')) return { type: 'AIS' };
   if (str.includes('"taxinformationsummary"') || str.includes('"tisdata"') || str.includes('"derived_information"')) return { type: 'TIS' };
-  if (str.includes('"form26as"') || str.includes('"partaofform26as"') || str.includes('"tdscollected"') || str.includes('"form168"')) return { type: '26AS' };
-
+  if (str.includes('"form26as"') || str.includes('"partaofform26as"') || str.includes('"form168"') || str.includes('"tdscollected"')) return { type: '26AS' };
   return { type: 'UNKNOWN' };
 }
 
@@ -582,196 +773,145 @@ function extractMeta(data, type) {
     for (const [k, v] of Object.entries(obj)) {
       const kl = k.toLowerCase();
       if (typeof v === 'string' || typeof v === 'number') {
-        if (['pan', 'permanentaccountnumber'].includes(kl)) meta.pan = v;
-        if (['name', 'taxpayername', 'assessee_name', 'assesseename', 'fullname'].includes(kl)) meta.name = v;
-        if (['ay', 'assessmentyear', 'assessment_year', 'financialyear', 'financial_year', 'fy'].includes(kl)) meta.ay = v;
-        if (['generatedon', 'generated_on', 'statementdate', 'statement_date', 'createddate', 'created_date', 'downloaddate'].includes(kl)) meta.date = v;
+        if (['pan','permanentaccountnumber'].includes(kl)) meta.pan = v;
+        if (['name','taxpayername','assessee_name','assesseename','fullname'].includes(kl)) meta.name = v;
+        if (['ay','assessmentyear','assessment_year','financialyear','financial_year','fy'].includes(kl)) meta.ay = v;
+        if (['generatedon','generated_on','statementdate','statement_date','createddate','created_date'].includes(kl)) meta.date = v;
       }
     }
   };
-  // Shallow pass on top-level and first nested level
   search(data);
   Object.values(data).forEach(v => { if (v && typeof v === 'object' && !Array.isArray(v)) search(v); });
   return meta;
 }
 
-// ═══════════════════════════════════════════════════════
-//  AIS PARSER
-// ═══════════════════════════════════════════════════════
+// ── AIS Parser ──────────────────────────────────────────────────────
 function parseAIS(data) {
-  // The ITD AIS JSON can have various nesting patterns
-  // Common structure: { createdDate, taxpayerInfo, aisData: { [...sections] } }
-  // or flat: { annualInformationStatement: { ... } }
-  
   const root = data.AnnualInformationStatement || data.annualInformationStatement
     || data.aisData || data.AISData || data.ais || data.AIS || data;
 
-  // Try to find arrays of transaction data
   const sections = [
-    { key: ['tdsTcsInformation', 'tds_tcs', 'TDSTCSInformation', 'tdsTcs', 'section_tds'], title: 'TDS / TCS Information', icon: '🏦' },
-    { key: ['salaryInformation', 'salary', 'SalaryInformation', 'section_salary'], title: 'Salary Income', icon: '💼' },
-    { key: ['dividendInformation', 'dividend', 'DividendInformation', 'section_dividend'], title: 'Dividend Income', icon: '📈' },
-    { key: ['interestInformation', 'interest', 'InterestInformation', 'section_interest'], title: 'Interest Income', icon: '🏛️' },
-    { key: ['capitalGains', 'capital_gains', 'CapitalGains', 'section_capital_gains'], title: 'Capital Gains', icon: '📊' },
-    { key: ['mutualFundTransactions', 'mutual_fund', 'MutualFundInformation', 'section_mf'], title: 'Mutual Fund Transactions', icon: '💹' },
-    { key: ['foreignRemittance', 'foreign_remittance', 'ForeignRemittance'], title: 'Foreign Remittance', icon: '🌐' },
-    { key: ['businessReceiptInformation', 'businessReceipt', 'BusinessReceipts'], title: 'Business Receipts', icon: '🧾' },
-    { key: ['sftInformation', 'sft', 'SFTInformation', 'section_sft'], title: 'SFT (Statement of Financial Transactions)', icon: '📋' },
-    { key: ['taxPaymentInformation', 'taxPayments', 'TaxPayments', 'section_tax_payment', 'advanceTax'], title: 'Tax Payments', icon: '💰' },
-    { key: ['refundInformation', 'refund', 'RefundInformation'], title: 'Refunds', icon: '↩️' },
-    { key: ['gstTurnoverInformation', 'gstTurnover', 'GSTTurnover'], title: 'GST Turnover', icon: '📦' },
-    { key: ['profitLossOnSaleOfImmovableProperty', 'immovableProperty', 'ImmovableProperty'], title: 'Immovable Property Transactions', icon: '🏠' },
-    { key: ['otherInformation', 'other', 'OtherInformation', 'miscellaneous'], title: 'Other Information', icon: '📌' },
+    { key: ['tdsTcsInformation','tds_tcs','TDSTCSInformation','tdsTcs','section_tds','tdsInformation'], title: 'TDS / TCS Information' },
+    { key: ['salaryInformation','salary','SalaryInformation'], title: 'Salary Income' },
+    { key: ['dividendInformation','dividend','DividendInformation'], title: 'Dividend Income' },
+    { key: ['interestInformation','interest','InterestInformation'], title: 'Interest Income' },
+    { key: ['capitalGains','capital_gains','CapitalGains'], title: 'Capital Gains' },
+    { key: ['mutualFundTransactions','mutual_fund','MutualFundInformation','mutualFund'], title: 'Mutual Fund Transactions' },
+    { key: ['foreignRemittance','foreign_remittance','ForeignRemittance'], title: 'Foreign Remittance' },
+    { key: ['businessReceiptInformation','businessReceipt','BusinessReceipts'], title: 'Business Receipts' },
+    { key: ['sftInformation','sft','SFTInformation'], title: 'SFT (Statement of Financial Transactions)' },
+    { key: ['taxPaymentInformation','taxPayments','TaxPayments','advanceTax'], title: 'Tax Payments' },
+    { key: ['refundInformation','refund','RefundInformation'], title: 'Refunds' },
+    { key: ['gstTurnoverInformation','gstTurnover','GSTTurnover'], title: 'GST Turnover' },
+    { key: ['immovableProperty','ImmovableProperty','propertyTransaction'], title: 'Immovable Property' },
+    { key: ['otherInformation','other','OtherInformation','miscellaneous'], title: 'Other Information' },
   ];
-
   let found = false;
   for (const sec of sections) {
     for (const k of sec.key) {
       const arr = deepFind(root, k);
       if (arr && Array.isArray(arr) && arr.length > 0) {
-        addSection(sec.title, arr);
-        found = true;
-        break;
+        addSection(sec.title, arr); found = true; break;
       }
     }
   }
-
-  // Fallback: scan all top-level arrays
-  if (!found || parsedSections.length === 0) {
-    scanAllArrays(root, 'AIS');
-  }
+  if (!found) scanAllArrays(root);
 }
 
-// ═══════════════════════════════════════════════════════
-//  TIS PARSER
-// ═══════════════════════════════════════════════════════
+// ── TIS Parser ──────────────────────────────────────────────────────
 function parseTIS(data) {
   const root = data.TaxInformationSummary || data.taxInformationSummary
     || data.tisData || data.TISData || data.tis || data.TIS || data;
-
   const sections = [
-    { key: ['salary', 'SalaryInformation', 'salaryDerived'], title: 'Salary', icon: '💼' },
-    { key: ['housePropertyIncome', 'house_property', 'HousePropertyIncome'], title: 'House Property Income', icon: '🏠' },
-    { key: ['businessProfession', 'business', 'BusinessProfession'], title: 'Business / Profession', icon: '🧾' },
-    { key: ['capitalGains', 'CapitalGains', 'capital_gains'], title: 'Capital Gains', icon: '📊' },
-    { key: ['otherSources', 'other_sources', 'OtherSources'], title: 'Other Sources', icon: '📌' },
-    { key: ['grossTotalIncome', 'GrossTotalIncome'], title: 'Gross Total Income', icon: '💰' },
-    { key: ['deductions', 'Deductions', 'chapterViA'], title: 'Deductions (Chapter VI-A)', icon: '🔖' },
-    { key: ['taxableIncome', 'TaxableIncome'], title: 'Taxable Income', icon: '📋' },
-    { key: ['taxLiability', 'TaxLiability', 'tax_liability'], title: 'Tax Liability', icon: '🏛️' },
-    { key: ['tdsTcs', 'TDSTCSInfo', 'tds'], title: 'TDS / TCS', icon: '🏦' },
-    { key: ['taxPaid', 'TaxPaid', 'tax_paid'], title: 'Tax Paid', icon: '💳' },
-    { key: ['taxPayable', 'TaxPayable', 'refund'], title: 'Tax Payable / Refund', icon: '↩️' },
+    { key: ['salary','SalaryInformation','salaryDerived'], title: 'Salary' },
+    { key: ['housePropertyIncome','house_property'], title: 'House Property' },
+    { key: ['businessProfession','business'], title: 'Business / Profession' },
+    { key: ['capitalGains','CapitalGains'], title: 'Capital Gains' },
+    { key: ['otherSources','other_sources'], title: 'Other Sources' },
+    { key: ['deductions','Deductions','chapterViA'], title: 'Deductions (Chapter VI-A)' },
+    { key: ['taxLiability','TaxLiability'], title: 'Tax Liability' },
+    { key: ['tdsTcs','TDSTCSInfo','tds'], title: 'TDS / TCS' },
+    { key: ['taxPaid','TaxPaid'], title: 'Tax Paid' },
+    { key: ['taxPayable','TaxPayable','refund'], title: 'Tax Payable / Refund' },
   ];
-
   let found = false;
   for (const sec of sections) {
     for (const k of sec.key) {
       const val = deepFind(root, k);
       if (val !== undefined && val !== null) {
-        if (Array.isArray(val) && val.length > 0) {
-          addSection(sec.title, val); found = true; break;
-        } else if (typeof val === 'object' && !Array.isArray(val)) {
-          addSection(sec.title, [val]); found = true; break;
-        }
+        const arr = Array.isArray(val) ? val : [val];
+        if (arr.length > 0 && typeof arr[0] === 'object') { addSection(sec.title, arr); found = true; break; }
       }
     }
   }
-
-  if (!found || parsedSections.length === 0) {
-    scanAllArrays(root, 'TIS');
-  }
+  if (!found) scanAllArrays(root);
 }
 
-// ═══════════════════════════════════════════════════════
-//  FORM 26AS PARSER
-// ═══════════════════════════════════════════════════════
+// ── Form 26AS Parser ────────────────────────────────────────────────
 function parse26AS(data) {
-  const root = data.Form26AS || data.form26AS || data.form_26as
-    || data.Form168 || data.form168 || data.TaxCreditStatement || data;
-
+  const root = data.Form26AS || data.form26AS || data.Form168 || data.TaxCreditStatement || data;
   const sections = [
-    { key: ['partA', 'PartA', 'part_a', 'tdsByDeductor', 'TDSDetails', 'tdsOnSalary'], title: 'Part A — TDS on Salary (Section 192)', icon: '💼' },
-    { key: ['partA1', 'PartA1', 'part_a1', 'tdsByDeductorOtherThanSalary'], title: 'Part A1 — TDS Other than Salary', icon: '🏦' },
-    { key: ['partA2', 'PartA2', 'part_a2', 'tdsOnSaleOfImmovableProperty'], title: 'Part A2 — TDS on Sale of Immovable Property', icon: '🏠' },
-    { key: ['partB', 'PartB', 'part_b', 'tcsCollected', 'TCSDetails'], title: 'Part B — Tax Collected at Source (TCS)', icon: '🧾' },
-    { key: ['partC', 'PartC', 'part_c', 'taxPaid', 'advanceTaxSelfAssessment'], title: 'Part C — Advance Tax / Self-Assessment Tax', icon: '💰' },
-    { key: ['partD', 'PartD', 'part_d', 'refundDetails', 'refund'], title: 'Part D — Tax Refund', icon: '↩️' },
-    { key: ['partE', 'PartE', 'part_e', 'aiFiscalInformation', 'annualInformation'], title: 'Part E — Annual Information (AIR/SFT)', icon: '📋' },
-    { key: ['partF', 'PartF', 'part_f', 'tdsOnSaleOfProperty'], title: 'Part F — TDS on Sale / Rent (Buyer)', icon: '🏛️' },
-    { key: ['partG', 'PartG', 'part_g', 'tdsDefaultDetails', 'defaults'], title: 'Part G — TDS Defaults', icon: '⚠️' },
+    { key: ['partA','PartA','part_a','tdsByDeductor'], title: 'Part A — TDS on Salary (Sec 192)' },
+    { key: ['partA1','PartA1','part_a1'], title: 'Part A1 — TDS (Other than Salary)' },
+    { key: ['partA2','PartA2','part_a2'], title: 'Part A2 — TDS on Immovable Property' },
+    { key: ['partB','PartB','part_b','tcsCollected'], title: 'Part B — Tax Collected at Source (TCS)' },
+    { key: ['partC','PartC','part_c','taxPaid','advanceTax'], title: 'Part C — Advance Tax / Self-Assessment' },
+    { key: ['partD','PartD','part_d','refundDetails'], title: 'Part D — Tax Refund' },
+    { key: ['partE','PartE','part_e','annualInformation'], title: 'Part E — Annual Information (AIR/SFT)' },
+    { key: ['partF','PartF','part_f'], title: 'Part F — TDS on Sale/Rent (Buyer)' },
+    { key: ['partG','PartG','part_g','tdsDefaultDetails'], title: 'Part G — TDS Defaults' },
   ];
-
   let found = false;
   for (const sec of sections) {
     for (const k of sec.key) {
       const val = deepFind(root, k);
       if (val !== undefined && val !== null) {
-        if (Array.isArray(val) && val.length > 0) {
-          addSection(sec.title, val); found = true; break;
-        } else if (typeof val === 'object' && !Array.isArray(val)) {
-          addSection(sec.title, [val]); found = true; break;
-        }
+        const arr = Array.isArray(val) ? val : [val];
+        if (arr.length > 0 && typeof arr[0] === 'object') { addSection(sec.title, arr); found = true; break; }
       }
     }
   }
-
-  if (!found || parsedSections.length === 0) {
-    scanAllArrays(root, '26AS');
-  }
+  if (!found) scanAllArrays(root);
 }
 
-// ═══════════════════════════════════════════════════════
-//  GENERIC PARSER (fallback)
-// ═══════════════════════════════════════════════════════
-function parseGeneric(data, filename) {
-  scanAllArrays(data, filename.replace('.json', '').toUpperCase());
-}
+function parseGeneric(data, filename) { scanAllArrays(data); }
 
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 //  HELPERS
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 function deepFind(obj, key) {
   if (!obj || typeof obj !== 'object') return undefined;
   if (obj[key] !== undefined) return obj[key];
   for (const v of Object.values(obj)) {
     if (v && typeof v === 'object') {
-      const found = deepFind(v, key);
-      if (found !== undefined) return found;
+      const f = deepFind(v, key);
+      if (f !== undefined) return f;
     }
   }
   return undefined;
 }
 
-function scanAllArrays(obj, prefix, depth = 0) {
+function scanAllArrays(obj, depth = 0) {
   if (!obj || typeof obj !== 'object' || depth > 6) return;
   for (const [k, v] of Object.entries(obj)) {
     if (Array.isArray(v) && v.length > 0 && typeof v[0] === 'object') {
-      const title = camelToTitle(k);
-      addSection(title, v);
+      addSection(camelToTitle(k), v);
     } else if (v && typeof v === 'object' && !Array.isArray(v)) {
-      scanAllArrays(v, prefix, depth + 1);
+      scanAllArrays(v, depth + 1);
     }
   }
 }
 
 function camelToTitle(str) {
-  return str
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/[_-]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
+  return str.replace(/([A-Z])/g,' $1').replace(/[_-]/g,' ').replace(/\s+/g,' ').trim()
     .replace(/\b\w/g, l => l.toUpperCase());
 }
 
 function addSection(title, dataArr) {
   if (!dataArr || dataArr.length === 0) return;
-  // Flatten array items into header/row structure
   const allKeys = new Set();
   dataArr.forEach(row => {
-    if (row && typeof row === 'object') {
-      flatKeys(row).forEach(k => allKeys.add(k));
-    }
+    if (row && typeof row === 'object') flatKeys(row).forEach(k => allKeys.add(k));
   });
   const headers = [...allKeys];
   if (headers.length === 0) return;
@@ -789,11 +929,8 @@ function flatKeys(obj, prefix = '') {
   const keys = [];
   for (const [k, v] of Object.entries(obj)) {
     const full = prefix ? prefix + '.' + k : k;
-    if (v && typeof v === 'object' && !Array.isArray(v)) {
-      keys.push(...flatKeys(v, full));
-    } else {
-      keys.push(full);
-    }
+    if (v && typeof v === 'object' && !Array.isArray(v)) keys.push(...flatKeys(v, full));
+    else keys.push(full);
   }
   return keys;
 }
@@ -805,48 +942,37 @@ function getNestedVal(obj, path) {
 function formatHeader(k) {
   const raw = k.includes('.') ? k.split('.').pop() : k;
   return camelToTitle(raw)
-    .replace(/\bTds\b/gi, 'TDS').replace(/\bTcs\b/gi, 'TCS')
-    .replace(/\bPan\b/gi, 'PAN').replace(/\bAy\b/gi, 'AY')
-    .replace(/\bFy\b/gi, 'FY').replace(/\bItc\b/gi, 'ITC')
-    .replace(/\bGst\b/gi, 'GST').replace(/\bSft\b/gi, 'SFT')
-    .replace(/\bAis\b/gi, 'AIS').replace(/\bTis\b/gi, 'TIS');
+    .replace(/\bTds\b/gi,'TDS').replace(/\bTcs\b/gi,'TCS')
+    .replace(/\bPan\b/gi,'PAN').replace(/\bAy\b/gi,'AY')
+    .replace(/\bFy\b/gi,'FY').replace(/\bGst\b/gi,'GST')
+    .replace(/\bSft\b/gi,'SFT').replace(/\bAis\b/gi,'AIS').replace(/\bTis\b/gi,'TIS');
 }
 
-function isAmountKey(h) {
-  return /amount|tax|income|credit|deduction|gross|net|total|balance|paid|receivable|payable|rate/i.test(h);
-}
-
-function isDateKey(h) {
-  return /date|period|year|month|quarter/i.test(h);
-}
+function isAmountKey(h) { return /amount|tax|income|credit|deduction|gross|net|total|balance|paid|receivable|payable|rate/i.test(h); }
+function isDateKey(h) { return /date|period|quarter/i.test(h); }
 
 function formatCell(val, header) {
   if (val === null || val === undefined || val === '') return '—';
   if (typeof val === 'boolean') return val ? 'Yes' : 'No';
   if (typeof val === 'object') return JSON.stringify(val);
   const str = String(val).trim();
-  // Format numbers as amounts
-  if (isAmountKey(header) && !isNaN(parseFloat(str)) && isFinite(str)) {
+  if (isAmountKey(header) && !isNaN(parseFloat(str)) && isFinite(str) && str !== '') {
     return '₹' + parseFloat(str).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
   return str;
 }
 
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 //  RENDER UI
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 function renderUI() {
-  // Show doc meta
+  // Doc meta
   const metaEl = document.getElementById('docMeta');
   metaEl.classList.add('visible');
   const badgeEl = document.getElementById('docTypeBadge');
   badgeEl.textContent = rawDocType === 'UNKNOWN' ? 'Tax Statement' : rawDocType;
-  badgeEl.className = 'doc-type-badge ' + ({
-    AIS: 'badge-ais', TIS: 'badge-tis', '26AS': 'badge-26as'
-  }[rawDocType] || 'badge-unknown');
-
-  document.getElementById('metaTaxpayer').textContent =
-    [docMeta.name, docMeta.pan].filter(Boolean).join(' · ') || '—';
+  badgeEl.className = 'doc-type-badge ' + ({AIS:'badge-ais',TIS:'badge-tis','26AS':'badge-26as'}[rawDocType] || 'badge-unknown');
+  document.getElementById('metaTaxpayer').textContent = [docMeta.name, docMeta.pan].filter(Boolean).join(' · ') || '—';
   document.getElementById('metaAY').textContent = docMeta.ay || '—';
   document.getElementById('metaDate').textContent = docMeta.date || '—';
 
@@ -873,25 +999,20 @@ function renderUI() {
     container.appendChild(block);
   });
 
-  // Hide upload zone
   document.getElementById('uploadSection').style.display = 'none';
 }
 
 function buildTableHTML(sec, idx) {
-  const tableId = 'tbl_' + idx;
+  const headersHTML = sec.headers.map(h => `<th>${escapeHTML(h)}</th>`).join('');
   const rowsHTML = sec.rows.map(row => {
     const cells = row.map((cell, ci) => {
       const h = sec.headers[ci];
       const display = formatCell(cell, h);
-      let cls = '';
-      if (isAmountKey(h)) cls = 'td-amount';
-      else if (isDateKey(h)) cls = 'td-mono';
+      const cls = isAmountKey(h) ? 'td-amount' : isDateKey(h) ? 'td-mono' : '';
       return `<td class="${cls}">${escapeHTML(display)}</td>`;
     }).join('');
     return `<tr>${cells}</tr>`;
   }).join('');
-
-  const headersHTML = sec.headers.map(h => `<th>${escapeHTML(h)}</th>`).join('');
 
   return `
   <div class="table-card">
@@ -916,19 +1037,18 @@ function buildTableHTML(sec, idx) {
       </div>
     </div>
     <div class="table-scroll">
-      <table id="${tableId}">
+      <table>
         <thead><tr>${headersHTML}</tr></thead>
-        <tbody>${rowsHTML || '<tr><td colspan="' + sec.headers.length + '" style="text-align:center;color:var(--ink-faint);padding:24px">No records</td></tr>'}</tbody>
+        <tbody>${rowsHTML || `<tr><td colspan="${sec.headers.length}" style="text-align:center;color:var(--ink-faint);padding:24px">No records</td></tr>`}</tbody>
       </table>
     </div>
   </div>`;
 }
 
 function escapeHTML(str) {
-  if (str === null || str === undefined) return '—';
-  return String(str)
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  return String(str ?? '—')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
 }
 
 function switchSection(idx) {
@@ -938,126 +1058,98 @@ function switchSection(idx) {
   document.querySelectorAll('.section-nav-btn')[idx].classList.add('active');
 }
 
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 //  COPY
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 function copyTable(idx) {
   const sec = parsedSections[idx];
-  const lines = [sec.headers.join('\t')];
-  sec.rows.forEach(row => {
-    lines.push(row.map(c => c === null || c === undefined ? '' : String(c)).join('\t'));
-  });
-  navigator.clipboard.writeText(lines.join('\n')).then(() => showToast('Table copied to clipboard!')).catch(() => {
-    // Fallback
-    const ta = document.createElement('textarea');
-    ta.value = lines.join('\n');
-    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
-    showToast('Table copied to clipboard!');
-  });
+  const lines = [sec.headers.join('\t'), ...sec.rows.map(row => row.map(c => c ?? '').join('\t'))];
+  navigator.clipboard.writeText(lines.join('\n'))
+    .then(() => showToast('Table copied to clipboard!'))
+    .catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = lines.join('\n');
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      showToast('Table copied!');
+    });
 }
 
-// ═══════════════════════════════════════════════════════
-//  CSV DOWNLOAD
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+//  CSV
+// ═══════════════════════════════════════════════════════════════════
 function rowToCSV(row) {
   return row.map(cell => {
     const s = cell === null || cell === undefined ? '' : String(cell);
-    if (s.includes(',') || s.includes('"') || s.includes('\n')) return '"' + s.replace(/"/g, '""') + '"';
-    return s;
+    return (s.includes(',') || s.includes('"') || s.includes('\n')) ? '"' + s.replace(/"/g,'""') + '"' : s;
   }).join(',');
 }
-
 function downloadCSV(idx) {
   const sec = parsedSections[idx];
   const csv = [rowToCSV(sec.headers), ...sec.rows.map(rowToCSV)].join('\r\n');
   const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
-  triggerDownload(blob, sanitizeFilename(sec.title) + '.csv');
+  triggerDownload(blob, sanitize(sec.title) + '.csv');
 }
+function downloadAllCSV() { parsedSections.forEach((_, i) => downloadCSV(i)); }
 
-function downloadAllCSV() {
-  parsedSections.forEach((_, i) => downloadCSV(i));
-}
-
-// ═══════════════════════════════════════════════════════
-//  XLSX DOWNLOAD
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+//  XLSX
+// ═══════════════════════════════════════════════════════════════════
 function downloadXLSX(idx) {
   const sec = parsedSections[idx];
   const wb = XLSX.utils.book_new();
-  const wsData = [sec.headers, ...sec.rows.map(row =>
-    row.map(c => c === null || c === undefined ? '' : c)
-  )];
-  const ws = XLSX.utils.aoa_to_sheet(wsData);
-
-  // Column widths
-  ws['!cols'] = sec.headers.map((h, ci) => {
-    const maxLen = Math.max(h.length, ...sec.rows.map(r => String(r[ci] || '').length));
-    return { wch: Math.min(Math.max(maxLen + 2, 10), 45) };
-  });
-
-  // Style header row (freeze + bold via xlsx)
+  const ws = XLSX.utils.aoa_to_sheet([sec.headers, ...sec.rows.map(r => r.map(c => c ?? ''))]);
+  ws['!cols'] = sec.headers.map((h, ci) => ({ wch: Math.min(Math.max(h.length, ...sec.rows.map(r => String(r[ci]||'').length)) + 2, 45) }));
   ws['!freeze'] = { xSplit: 0, ySplit: 1 };
-
   XLSX.utils.book_append_sheet(wb, ws, sec.title.substring(0, 31));
-  XLSX.writeFile(wb, sanitizeFilename(sec.title) + '.xlsx');
+  XLSX.writeFile(wb, sanitize(sec.title) + '.xlsx');
 }
-
 function downloadAllXLSX() {
   const wb = XLSX.utils.book_new();
   parsedSections.forEach(sec => {
-    const wsData = [sec.headers, ...sec.rows.map(row =>
-      row.map(c => c === null || c === undefined ? '' : c)
-    )];
-    const ws = XLSX.utils.aoa_to_sheet(wsData);
-    ws['!cols'] = sec.headers.map((h, ci) => {
-      const maxLen = Math.max(h.length, ...sec.rows.map(r => String(r[ci] || '').length));
-      return { wch: Math.min(Math.max(maxLen + 2, 10), 45) };
-    });
+    const ws = XLSX.utils.aoa_to_sheet([sec.headers, ...sec.rows.map(r => r.map(c => c ?? ''))]);
+    ws['!cols'] = sec.headers.map((h, ci) => ({ wch: Math.min(Math.max(h.length, ...sec.rows.map(r => String(r[ci]||'').length)) + 2, 45) }));
     ws['!freeze'] = { xSplit: 0, ySplit: 1 };
-    const sheetName = sec.title.substring(0, 31);
-    XLSX.utils.book_append_sheet(wb, ws, sheetName);
+    XLSX.utils.book_append_sheet(wb, ws, sec.title.substring(0, 31));
   });
-  const name = (rawDocType || 'TaxStatement') + '_Export';
-  XLSX.writeFile(wb, sanitizeFilename(name) + '.xlsx');
+  XLSX.writeFile(wb, sanitize(rawDocType || 'TaxStatement') + '_Export.xlsx');
 }
 
-function sanitizeFilename(str) {
-  return str.replace(/[^a-zA-Z0-9_\-\s]/g, '').replace(/\s+/g, '_').substring(0, 60) || 'export';
-}
-
+function sanitize(str) { return str.replace(/[^a-zA-Z0-9_\-\s]/g,'').replace(/\s+/g,'_').substring(0,60) || 'export'; }
 function triggerDownload(blob, filename) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a);
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-// ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 //  UI HELPERS
-// ═══════════════════════════════════════════════════════
-function showLoading() { document.getElementById('loadingOverlay').classList.add('show'); }
+// ═══════════════════════════════════════════════════════════════════
+function showLoading(msg) {
+  document.getElementById('loadingText').textContent = msg || 'Processing…';
+  document.getElementById('loadingOverlay').classList.add('show');
+}
 function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
 
-function showError(msg) {
-  const box = document.getElementById('errorBox');
+function showError(msg, hint) {
   document.getElementById('errorMsg').textContent = msg;
-  box.style.display = 'flex';
+  const hintEl = document.getElementById('errorHint');
+  if (hint) { hintEl.textContent = hint; hintEl.style.display = 'block'; }
+  else { hintEl.style.display = 'none'; }
+  document.getElementById('errorBox').style.display = 'flex';
 }
 function hideError() { document.getElementById('errorBox').style.display = 'none'; }
 
 function showToast(msg) {
   const t = document.getElementById('copyToast');
-  t.textContent = msg;
-  t.classList.add('show');
+  t.textContent = msg; t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
 function resetApp() {
-  parsedSections = [];
-  rawDocType = '';
-  docMeta = {};
+  parsedSections = []; rawDocType = ''; docMeta = {};
+  pendingRawText = null; pendingFilename = '';
   document.getElementById('uploadSection').style.display = '';
   document.getElementById('docMeta').classList.remove('visible');
   document.getElementById('sectionNav').classList.remove('visible');
